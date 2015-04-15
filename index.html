@@ -80,6 +80,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/15/java-hashmap/" title="JAVA集合系列——HashMap实现原理" itemprop="url">JAVA集合系列——HashMap实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-15T01:14:46.000Z" itemprop="datePublished"> 发表于 2015-04-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="HashMap的实现原理">HashMap的实现原理</h1><h2 id="特点">特点</h2><p>1.基于哈希表的Map实现<br>2.非同步,也就是非线程安全<br>3.允许NULL键和NULL值<br>4.无序<br>5.插入快，查询快，删除快</p>
+<h2 id="数据结构">数据结构</h2><p>由于HashMap是基于哈希表，所以拥有哈希表的所有优点和缺点;HashMap实际上是位桶和链表的结合体.</p>
+<p><img src="http://blog01.qiniudn.com/1758362081.jpg?imageView2/2/w/450" alt="hashmap"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始的数组容量大小</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//负载因子</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//table数组扩容的临界值，是当前数组容量*负载因子</span></span><br><span class="line">   <span class="keyword">int</span> threshold;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//table数组</span></span><br><span class="line">   <span class="keyword">transient</span> Entry[] table;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//链表实现</span></span><br><span class="line">   <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">       <span class="keyword">final</span> K key;</span><br><span class="line">       V value;</span><br><span class="line">       Entry&lt;K,V&gt; next;</span><br><span class="line">       <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line"></span><br><span class="line">       <span class="javadoc">/**</span><br><span class="line">        * Creates new entry.</span><br><span class="line">        */</span></span><br><span class="line">       Entry(<span class="keyword">int</span> h, K k, V v, Entry&lt;K,V&gt; n) &#123;</span><br><span class="line">           value = v;</span><br><span class="line">           next = n;</span><br><span class="line">           key = k;</span><br><span class="line">           hash = h;</span><br><span class="line">       &#125;</span><br><span class="line">       ...</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/15/java-hashmap/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java/">Java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/15/java-hashmap/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/15/java-hashmap/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/12/ab-apache/" title="使用ab命令对博客进行性能压测" itemprop="url">使用ab命令对博客进行性能压测</a>
   </h1>
   <p class="article-author">By
@@ -124,6 +190,9 @@
 
 
 <div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/12/ab-apache/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/12/ab-apache/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -197,6 +266,9 @@
 
 <div class="comments-count">
 	
+	  	<span></span>
+		<a href="/2015/04/11/hexo-blog/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/11/hexo-blog/" data-count-type="comments">&nbsp;</a>
+	
 </div>
 
 </footer>
@@ -223,6 +295,10 @@
 		<ul>
 		
 		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 		  
 		
@@ -245,6 +321,10 @@
 		
 			
 				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -368,6 +448,18 @@ $(document).ready(function(){
 
 
 
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"royin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
