@@ -80,6 +80,77 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/17/java-hashSet/" title="JAVA集合系列——HashSet实现原理" itemprop="url">JAVA集合系列——HashSet实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-17T11:58:51.000Z" itemprop="datePublished"> 发表于 2015-04-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="HashSet实现原理">HashSet实现原理</h1><h2 id="特点">特点</h2><ol>
+<li>基于HashMap实现</li>
+<li>无序</li>
+<li>允许null值</li>
+<li>元素不重复</li>
+<li>非线程安全</li>
+</ol>
+<h2 id="数据结构和初始化">数据结构和初始化</h2><p>HashSet底层是基于HashMap实现的，它的所有数据都存放到HashMap中，更准确的说应该的HashMap的key中，所以无法保证有序，但保证元素的唯一性(HashMap的key是唯一的，本质还是通过key对象的equals和hashCode方法实现的)，而HashMap的value值则直接赋值PRESENT常量。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基于HashMap</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="comment">//常量PRESENT，用于设值HashMap的value</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</span><br><span class="line"><span class="comment">//默认构造，初始化了HashMap,HashMap默认的加载因子为0.75</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> map = <span class="keyword">new</span> HashMap&lt;E,Object&gt;();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定初始容量</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line"> map = <span class="keyword">new</span> HashMap&lt;E,Object&gt;(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定初始的容量和加载因子</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line"> map = <span class="keyword">new</span> HashMap&lt;E,Object&gt;(initialCapacity, loadFactor);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定初始集合</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">	map = <span class="keyword">new</span> HashMap&lt;E,Object&gt;(Math.max((<span class="keyword">int</span>) (c.size()/<span class="number">.75f</span>) + <span class="number">1</span>, <span class="number">16</span>));</span><br><span class="line">	addAll(c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定初始容量和加载因子，实例下一个LinkedHashMap</span></span><br><span class="line"><span class="comment">//这个构造方法是包访问权限，是为LinkedHashSet提供的</span></span><br><span class="line">HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</span><br><span class="line">	map = <span class="keyword">new</span> LinkedHashMap&lt;E,Object&gt;(initialCapacity, loadFactor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/17/java-hashSet/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HashSet/">HashSet</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/17/java-hashSet/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/17/java-hashSet/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/16/java-ArrayList/" title="JAVA集合系列——ArrayList实现原理" itemprop="url">JAVA集合系列——ArrayList实现原理</a>
   </h1>
   <p class="article-author">By
@@ -97,6 +168,7 @@
 <li>List接口的可变数组实现</li>
 <li>允许null值</li>
 <li>非线程安全</li>
+<li>有序</li>
 <li>查询快，插入慢，删除慢</li>
 </ol>
 <h2 id="数据结构">数据结构</h2><p>ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包含元素的个数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="comment">//底层数组</span></span><br><span class="line"><span class="comment">//transient:表示序列化的时候不包含此属性</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</span><br></pre></td></tr></table></figure></p>
@@ -366,7 +438,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
 		  
 		
 		  
@@ -392,6 +464,10 @@
 		
 			
 				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>1</sup></a></li>
 			
 		
 			

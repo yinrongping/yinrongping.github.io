@@ -15,9 +15,10 @@
 List接口的可变数组实现
 允许null值
 非线程安全
+有序
 查询快，插入慢，删除慢
 
-数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包含此属">
+数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA集合系列——ArrayList实现原理">
 <meta property="og:url" content="http://yinrongping.github.io/2015/04/16/java-ArrayList/index.html">
@@ -26,18 +27,20 @@ List接口的可变数组实现
 List接口的可变数组实现
 允许null值
 非线程安全
+有序
 查询快，插入慢，删除慢
 
-数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包含此属">
+数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA集合系列——ArrayList实现原理">
 <meta name="twitter:description" content="ArrayList的实现原理特点
 List接口的可变数组实现
 允许null值
 非线程安全
+有序
 查询快，插入慢，删除慢
 
-数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包含此属">
+数据结构ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数12345//包含元素的个数private int size;//底层数组//transient:表示序列化的时候不包">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -120,6 +123,7 @@ List接口的可变数组实现
 <li>List接口的可变数组实现</li>
 <li>允许null值</li>
 <li>非线程安全</li>
+<li>有序</li>
 <li>查询快，插入慢，删除慢</li>
 </ol>
 <h2 id="数据结构">数据结构</h2><p>ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包含元素的个数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="comment">//底层数组</span></span><br><span class="line"><span class="comment">//transient:表示序列化的时候不包含此属性</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</span><br></pre></td></tr></table></figure></p>
@@ -169,6 +173,14 @@ List接口的可变数组实现
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/04/17/java-hashSet/" title="JAVA集合系列——HashSet实现原理">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JAVA集合系列——HashSet实现原理</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/04/15/java-hashmap/"  title="JAVA集合系列——HashMap实现原理">
@@ -206,7 +218,7 @@ List接口的可变数组实现
 		<ul>
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
 		  
 		
 		  
@@ -232,6 +244,10 @@ List接口的可变数组实现
 		
 			
 				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>1</sup></a></li>
 			
 		
 			
