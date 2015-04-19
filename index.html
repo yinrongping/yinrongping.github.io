@@ -80,7 +80,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/18/linux-nginx-1/" title="Nginx系列——安装与配置（一）" itemprop="url">Nginx系列——安装与配置（一）</a>
+      <a href="/2015/04/19/linux-nginx-2/" title="Nginx系列——主要模块" itemprop="url">Nginx系列——主要模块</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-19T09:54:48.000Z" itemprop="datePublished"> 发表于 2015-04-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Nginx系列——主要模块">Nginx系列——主要模块</h1><p>在讲Nginx各个模块之前，先了解下Nginx的内置变量还是十分有必要的。变量说多不多，说少也不少，大家不必要全部记住，大概知道哪些就可以了。</p>
+<h2 id="内置变量">内置变量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arg_PARAMETER</span>   <span class="comment">#这个变量包含在查询字符串时GET请求PARAMETER的值。</span></span><br><span class="line"><span class="variable">$args</span>            <span class="comment">#这个变量等于请求行中的参数。</span></span><br><span class="line"><span class="variable">$binary_remote_addr</span>  <span class="comment">#二进制码形式的客户端地址。</span></span><br><span class="line"><span class="variable">$body_bytes_sent</span>     <span class="comment">#传送页面的字节数  </span></span><br><span class="line"><span class="variable">$content_length</span>      <span class="comment">#请求头中的Content-length字段。</span></span><br><span class="line"><span class="variable">$content_type</span>        <span class="comment">#请求头中的Content-Type字段。</span></span><br><span class="line"><span class="variable">$cookie_COOKIE</span>       <span class="comment">#cookie COOKIE的值。</span></span><br><span class="line"><span class="variable">$document_root</span>       <span class="comment">#当前请求在root指令中指定的值。</span></span><br><span class="line"><span class="variable">$document_uri</span>        <span class="comment">#与$uri相同。</span></span><br><span class="line"><span class="variable">$host</span>       <span class="comment">#请求中的主机头(Host)字段，如果请求中的主机头不可用或者空，则为处理请求的server名称(处理请求的server</span></span><br><span class="line"><span class="comment">#的server_name指令的值)。值为小写，不包含端口</span></span><br><span class="line"><span class="variable">$hostname</span>  <span class="comment">#机器名使用 gethostname系统调用的值</span></span><br><span class="line"><span class="variable">$http_HEADER</span>   <span class="comment">#HTTP请求头中的内容，HEADER为HTTP请求中的内容转为小写，-变为_(破折号变为下划线)，</span></span><br><span class="line"><span class="comment">#例如：$http_user_agent(Uaer-Agent的值), $http_referer...</span></span><br><span class="line"><span class="variable">$sent_http_HEADER</span> <span class="comment">#HTTP响应头中的内容，HEADER为HTTP响应中的内容转为小写，-变为_(破折号变为下划线)，</span></span><br><span class="line"><span class="comment">#例如： $sent_http_cache_control, $sent_http_content_type...;</span></span><br><span class="line"><span class="variable">$is_args</span>       <span class="comment">#如果$args设置，值为"?"，否则为""。</span></span><br><span class="line"><span class="variable">$limit_rate</span>    <span class="comment">#这个变量可以限制连接速率。</span></span><br><span class="line"><span class="variable">$nginx_version</span>     <span class="comment">#当前运行的nginx版本号。</span></span><br><span class="line"><span class="variable">$query_string</span>      <span class="comment">#与$args相同。</span></span><br><span class="line"><span class="variable">$remote_addr</span>       <span class="comment">#客户端的IP地址。</span></span><br><span class="line"><span class="variable">$remote_port</span>       <span class="comment">#客户端的端口。</span></span><br><span class="line"><span class="variable">$remote_user</span>       <span class="comment">#已经经过Auth Basic Module验证的用户名。</span></span><br><span class="line"><span class="variable">$request_filename</span>  <span class="comment">#当前连接请求的文件路径，由root或alias指令与URI请求生成。</span></span><br><span class="line"><span class="variable">$request_body</span>      <span class="comment">#这个变量（0.7.58+）包含请求的主要信息。在使用proxy_pass或fastcgi_pass指令的location中比较有意义。</span></span><br><span class="line"><span class="variable">$request_body_file</span> <span class="comment">#客户端请求主体信息的临时文件名。</span></span><br><span class="line"><span class="variable">$request_completion</span> <span class="comment">#请求完成</span></span><br><span class="line"><span class="variable">$request_method</span>     <span class="comment">#这个变量是客户端请求的动作，通常为GET或POST。包括0.8.20及之前的版本中，这个变量总为mainrequest中的动作，如果当前请求是一个子请求，并不使用这个当前请求的动作。</span></span><br><span class="line"><span class="variable">$request_uri</span>       <span class="comment">#这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI。</span></span><br><span class="line"><span class="variable">$schemeHTTP</span>   <span class="comment">#方法（如http，https）。按需使用，例：</span></span><br><span class="line">rewrite ^(.+)$ <span class="variable">$scheme</span>://example.com<span class="variable">$1</span> redirect;</span><br><span class="line"><span class="variable">$server_addr</span> 服务器地址，在完成一次系统调用后可以确定这个值，如果要绕开系统调用，则必须在listen中指定地址并且使用<span class="built_in">bind</span>参数。</span><br><span class="line"><span class="variable">$server_name</span>    <span class="comment">#服务器名称。</span></span><br><span class="line"><span class="variable">$server_port</span>    <span class="comment">#请求到达服务器的端口号。</span></span><br><span class="line"><span class="variable">$server_protocol</span>  <span class="comment">#请求使用的协议，通常是HTTP/1.0或HTTP/1.1。</span></span><br><span class="line"><span class="variable">$uri</span>    <span class="comment">#请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改。</span></span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/19/linux-nginx-2/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Nginx/">Nginx</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/19/linux-nginx-2/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/19/linux-nginx-2/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/18/linux-nginx-1/" title="Nginx系列——安装与配置" itemprop="url">Nginx系列——安装与配置</a>
   </h1>
   <p class="article-author">By
        
@@ -511,7 +576,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 		  
 		
 		  
@@ -528,11 +593,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
