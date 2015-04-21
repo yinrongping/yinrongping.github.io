@@ -1,0 +1,510 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Nginx系列——Nginx配置与优化 | Roy.Yin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Roy.Yin">
+    
+
+    
+    <meta name="description" content="Nginx配置与优化include使用当我们配置多个虚拟主机在nginx配置文件中的时候，我们会越来越发现，nginx.conf文件越来越大，维护起来也越来越麻烦，这个时候我们就需要使用include,把每个虚拟主机配置到自己的conf中，然后在nginx.conf中include就可以了。12345#目录nginx.confsite/    www_abc_com.conf    www_edf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx系列——Nginx配置与优化">
+<meta property="og:url" content="http://yinrongping.github.io/2015/04/22/linux-nginx-3/index.html">
+<meta property="og:site_name" content="Roy.Yin's Blog">
+<meta property="og:description" content="Nginx配置与优化include使用当我们配置多个虚拟主机在nginx配置文件中的时候，我们会越来越发现，nginx.conf文件越来越大，维护起来也越来越麻烦，这个时候我们就需要使用include,把每个虚拟主机配置到自己的conf中，然后在nginx.conf中include就可以了。12345#目录nginx.confsite/    www_abc_com.conf    www_edf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx系列——Nginx配置与优化">
+<meta name="twitter:description" content="Nginx配置与优化include使用当我们配置多个虚拟主机在nginx配置文件中的时候，我们会越来越发现，nginx.conf文件越来越大，维护起来也越来越麻烦，这个时候我们就需要使用include,把每个虚拟主机配置到自己的conf中，然后在nginx.conf中include就可以了。12345#目录nginx.confsite/    www_abc_com.conf    www_edf">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Roy.Yin&#39;s Blog" title="Roy.Yin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Roy.Yin&#39;s Blog">Roy.Yin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">不要见怪，不要见外</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yinrongping.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/22/linux-nginx-3/" title="Nginx系列——Nginx配置与优化" itemprop="url">Nginx系列——Nginx配置与优化</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-21T16:54:48.000Z" itemprop="datePublished"> 发表于 2015-04-22</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx配置与优化"><span class="toc-number">1.</span> <span class="toc-text">Nginx配置与优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#include使用"><span class="toc-number">1.1.</span> <span class="toc-text">include使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录配置(root&alias)"><span class="toc-number">1.2.</span> <span class="toc-text">目录配置(root&alias)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期设置(expires)"><span class="toc-number">1.3.</span> <span class="toc-text">过期设置(expires)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取客户端真实IP"><span class="toc-number">1.4.</span> <span class="toc-text">获取客户端真实IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡"><span class="toc-number">1.5.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问控制"><span class="toc-number">1.6.</span> <span class="toc-text">访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限制IP"><span class="toc-number">1.6.1.</span> <span class="toc-text">限制IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制目录"><span class="toc-number">1.6.2.</span> <span class="toc-text">限制目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制速度"><span class="toc-number">1.6.3.</span> <span class="toc-text">限制速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制请求数"><span class="toc-number">1.6.4.</span> <span class="toc-text">限制请求数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpLimitReqModul"><span class="toc-number">1.6.5.</span> <span class="toc-text">HttpLimitReqModul</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpLimitConnModul"><span class="toc-number">1.6.6.</span> <span class="toc-text">HttpLimitConnModul</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动gzip压缩"><span class="toc-number">1.7.</span> <span class="toc-text">启动gzip压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy_Cache"><span class="toc-number">1.8.</span> <span class="toc-text">Proxy Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志切割"><span class="toc-number">1.9.</span> <span class="toc-text">日志切割</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Nginx配置与优化">Nginx配置与优化</h1><h2 id="include使用">include使用</h2><p>当我们配置多个虚拟主机在nginx配置文件中的时候，我们会越来越发现，nginx.conf文件越来越大，维护起来也越来越麻烦，这个时候我们就需要使用include,把每个虚拟主机配置到自己的conf中，然后在nginx.conf中include就可以了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#目录</span></span><br><span class="line">nginx.conf</span><br><span class="line">site/</span><br><span class="line">    www_abc_com.conf</span><br><span class="line">    www_edf_com.conf</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx.conf配置</span></span><br><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line">    include site/www_abc_com.conf;</span><br><span class="line">    include site/www_edf_com.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然一些特殊功能模块的配置也可以独立出一个单一的配置文件，这样nginx.conf的结构会很清晰。</p>
+<a id="more"></a>
+<h2 id="目录配置(root&amp;alias)">目录配置(root&amp;alias)</h2><p>Nginx的目录配置一般有2种方式，一个是root，另一个是alias;它们最主要的区别是：alias指定的目录是准确的，root是指定目录的上级目录。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /static/ &#123;</span><br><span class="line">    root /var/html/;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#如果访问路径是“www.xxx.com/static/a.js”,实际指向“/var/html/static/a.js”;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lcoation /static/ &#123;</span><br><span class="line">    <span class="built_in">alias</span> /var/html/static/;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#如果访问路径是“www.xxx.com/static/a.js”,实际指向“/var/html/static/a.js”;</span></span><br><span class="line"><span class="comment">#alias的配置必须用“/”结束，否则达不到文件</span></span><br></pre></td></tr></table></figure>
+<p>nginx还有一个指令用来打开目录的浏览功能，那就是“autoindex”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">location /image/ &#123;</span><br><span class="line">    <span class="comment">#on:表示打开目录浏览功能，默认为off</span></span><br><span class="line">    autoindex on;</span><br><span class="line">    <span class="comment">#on:显示出文件的确切大小，单位是bytes；默认为on</span></span><br><span class="line">    <span class="comment">#off：显示出文件的大概大小，单位是kB或者MB或者GB</span></span><br><span class="line">    autoindex_exact_size  off;</span><br><span class="line">    <span class="comment">#on：显示的文件时间为文件的服务器时间</span></span><br><span class="line">    <span class="comment">#off：显示的文件时间为GMT时间，默认为off</span></span><br><span class="line">    autoindex_localtime on;</span><br><span class="line">    <span class="built_in">alias</span> /var/html/image/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="过期设置(expires)">过期设置(expires)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location ~* ^.+\.(ico|gif|jpg|jpeg|png|html|htm)$ &#123;</span><br><span class="line">    root         /var/www/poseidon/root/static;</span><br><span class="line">    access_<span class="built_in">log</span>   off; <span class="comment">#不启用日志</span></span><br><span class="line">    expires      <span class="number">30</span>d; <span class="comment">#缓存30天</span></span><br><span class="line">&#125;</span><br><span class="line">location ~* ^.+\.(css|js|txt|xml)$ &#123;</span><br><span class="line">    root         /var/www/poseidon/root/static;</span><br><span class="line">    access_<span class="built_in">log</span>   off;</span><br><span class="line">    expires      <span class="number">24</span>h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>expires</strong><br>语法：expires [time|epoch|max|pff]<br>默认值： expires off<br>作用域： http, server, location<br>expires指令通过控制HTTP应答中的“Expires”和“Cache-Control”Header头部信息，达到控制页面缓存的作用<br><strong>time</strong>：可以是正数或者负数，控制“Expires”的值为当前时间+time的值，也可以控制“Cache-Control”的值，负数表示“no-cache”,正数或0 表示max-age=time。<br>如果加日期后缀的话，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ms: milliseconds 毫秒</span><br><span class="line">s: seconds 秒</span><br><span class="line">m: minutes 分钟</span><br><span class="line">h: hours 小时</span><br><span class="line">d: days 天</span><br><span class="line">w: weeks 周</span><br><span class="line">M: months (<span class="number">30</span> days) 月</span><br><span class="line">y: years (<span class="number">365</span> days)， 年</span><br></pre></td></tr></table></figure></p>
+<p>不加默认表示秒数，后缀可以多个一起使用。例如：“expires 1h30m”表示1小时30分钟后过期，“expires 1y1M”表示1年1个月后过期；<br>time也可以使用绝对时间，只要使用“@”符号，如“expires @10:20” 表示过期时间为10:20这个时间点。<br><strong>epoch</strong>：表示自1970年一月一日00:00:01 GMT的绝对时间，很少用。<br><strong>max</strong>：指定Expires的值为2037年12月31日23:59:59，Cache-Control的值为10 years。</p>
+<h2 id="获取客户端真实IP">获取客户端真实IP</h2><p>为了后端服务器能获取到客户端真实的IP，需要在配置安装Nginx的时候加上<strong>—with-http_realip_module</strong>模块，然后在nginx.conf加入如下配置。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy_<span class="built_in">set</span>_header        Host            <span class="variable">$host</span>;</span><br><span class="line">proxy_<span class="built_in">set</span>_header        X-Real-IP       <span class="variable">$remote_addr</span>;</span><br><span class="line">proxy_<span class="built_in">set</span>_header        X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="负载均衡">负载均衡</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    upstream myserver &#123; </span><br><span class="line">        server <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8001</span> down; </span><br><span class="line">        server <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8002</span> weight=<span class="number">2</span>; </span><br><span class="line">        server <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8003</span> weight=<span class="number">6</span>; </span><br><span class="line">        server <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8004</span> backup; </span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    server&#123;</span><br><span class="line">        listen <span class="number">80</span>;</span><br><span class="line">        location / &#123;</span><br><span class="line">          proxy_pass http://myserver;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>upstream的配置详情请查看<a href="http://yinrongping.github.io/2015/04/19/linux-nginx-2/#upstream模块" target="_blank" rel="external">Nginx模块-upstream</a>。</p>
+<h2 id="访问控制">访问控制</h2><h3 id="限制IP">限制IP</h3><p>Nginx可以限制和允许IP访问，但是你必须要在安装的时候配置<strong>–without-http_access_module</strong>，从而加入ngx_http_geo_module模块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    <span class="comment">#deny 限制</span></span><br><span class="line">    deny <span class="number">192.168</span>.<span class="number">1.1</span>;</span><br><span class="line">    <span class="comment">#allow 允许192.168.1.0-192.168.1.254范围的IP</span></span><br><span class="line">    allow <span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span>;</span><br><span class="line">    <span class="comment">#allow 允许10.1.0.0-10.1.255.254范围的IP</span></span><br><span class="line">    allow <span class="number">10.1</span>.<span class="number">0.0</span>/<span class="number">16</span>;</span><br><span class="line">    deny all;</span><br><span class="line">    <span class="comment">#匹配从上到下执行，匹配到就跳出，deny all就是拒绝所有</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="限制目录">限制目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /admin &#123;</span><br><span class="line">     deny all;</span><br><span class="line">     <span class="built_in">return</span> <span class="number">403</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="限制速度">限制速度</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /download &#123;</span><br><span class="line">   <span class="comment">#向客户端传播的速度为100K/s,此限制只针对一个连接的设定</span></span><br><span class="line">   <span class="built_in">limit</span>_rate <span class="number">100</span>k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /download &#123;</span><br><span class="line">   <span class="comment">#如果加上limit_rate_after，表示在传播了10m流量后，将速度限制为50k/s</span></span><br><span class="line">   <span class="built_in">limit</span>_rate_after <span class="number">10</span>m;</span><br><span class="line">   <span class="built_in">limit</span>_rate <span class="number">50</span>k;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="限制请求数">限制请求数</h3><p>Nginx有2个模块可以实现限制请求数，一个是HttpLimitReqModul，它限制的是一个ip在一段时间内的访问次数，另外一个是HttpLimitConnModul，它限制的是一个ip某个时刻的并发数。</p>
+<h3 id="HttpLimitReqModul">HttpLimitReqModul</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">#设定一个名称为“one”的，以二进制的IP地址为key的limit_req_zone来存在</span></span><br><span class="line">    <span class="comment">#状态，大小为10m(1m能保持大约16000个IP状态)，滴落速率位2r/s，表示限</span></span><br><span class="line">    <span class="comment">#制平均每秒的请求数为2个，rate的值必须为整数，如限制两秒钟一个请求，</span></span><br><span class="line">    <span class="comment">#可以设置成30r/m</span></span><br><span class="line">    <span class="built_in">limit</span>_req_zone <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10</span>m rate=<span class="number">2</span>r/s;</span><br><span class="line">    server&#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">#CASE1</span></span><br><span class="line">        location &#123;</span><br><span class="line">            <span class="comment">#zone设定的为你定义的limit_req_zone的名称，burst表示峰值</span></span><br><span class="line">            <span class="comment">#严格按照2r/s的速度处理请求，如果并发数在burst数之内，</span></span><br><span class="line">            <span class="comment">#来不及处理的请求将会被挂起，延时处理，如果超过了burst数的请求</span></span><br><span class="line">            <span class="comment">#就会直接返回503</span></span><br><span class="line">            <span class="built_in">limit</span>_req zone=one burst=<span class="number">5</span>;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">#CASE2</span></span><br><span class="line">        location &#123;</span><br><span class="line">            <span class="comment">#如果加上了nodelay，表示不延时处理，实际每秒处理的请求数</span></span><br><span class="line">            <span class="comment">#为rate的2+burst的5，为7r/s，超过7的并发数的请求还是会返回503</span></span><br><span class="line">            <span class="built_in">limit</span>_req zone=one burst=<span class="number">5</span> nodelay;</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="HttpLimitConnModul">HttpLimitConnModul</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">#定义一个名为one的limit_conn_zone,大小10m内存来存储状态，</span></span><br><span class="line">    <span class="comment">#以$binary_remote_addr二进制ip为key</span></span><br><span class="line">    <span class="built_in">limit</span>_conn_zone <span class="variable">$binary_remote_addr</span> zone=one:<span class="number">10</span>m;</span><br><span class="line">    <span class="comment">#设置日志级别</span></span><br><span class="line">    <span class="built_in">limit</span>_conn_<span class="built_in">log</span>_level notice;</span><br><span class="line">    server&#123;</span><br><span class="line">        location &#123;</span><br><span class="line">           <span class="comment">#并发数限制为20</span></span><br><span class="line">           <span class="built_in">limit</span>_conn one <span class="number">20</span>; </span><br><span class="line">           <span class="comment">#带宽限制为100k,对单个连接限数</span></span><br><span class="line">           <span class="built_in">limit</span>_rate <span class="number">100</span>k;  </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="启动gzip压缩">启动gzip压缩</h2><p>Nginx支持gzip压缩，对输出的数据流进行实时压缩。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gzip  on;</span><br><span class="line">gzip_<span class="built_in">disable</span> <span class="string">"msie6"</span>;</span><br><span class="line">gzip_min_length <span class="number">1</span>k;</span><br><span class="line">gzip_buffers <span class="number">4</span> <span class="number">16</span>k;</span><br><span class="line">gzip_proxied any; </span><br><span class="line">gzip_comp_level <span class="number">4</span>;</span><br><span class="line">gzip_types text/plain application/x-javascript text/css application/xml</span><br><span class="line">gzip_vary on;</span><br><span class="line">gzip_http_version <span class="number">1.0</span>;</span><br></pre></td></tr></table></figure></p>
+<p><strong>gzip on|off</strong><br>默认值: gzip off<br>作用域: http, server, location, if (x) location<br>开启或者关闭gzip模块。</p>
+<p><strong>gzip_disable “MSIE [1-6].”</strong><br>作用域: http, server, location<br>禁用IE6以下版本的gzip压缩，因为坑爹的IE6。</p>
+<p><strong>gzip_min_length 1k</strong><br>默认值：gzip_min_length 0<br>作用域: http, server, location<br>作用：设置允许压缩的页面最小字节数，页面字节数从header头中的Content-Length中进行获取。<br>默认值是0，不管页面多大都压缩，建议设置成大于1k的字节数，小于1k可能会越压越大。</p>
+<p><strong>gzip_buffers 4 16</strong><br>默认值: gzip_buffers 4 4k/8k<br>作用域: http, server, location<br>设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。例如 4 4k代表以4k为单位，按照原始数据大小以4k为单位的4倍申请内存。 4 8k代表以8k为单位，按照原始数据大小以8k为单位的4倍申请内存。<br>如果没有设置，默认值是申请跟原始数据相同大小的内存空间去存储gzip压缩结果。</p>
+<p><strong>gzip_proxied</strong><br>语法: gzip_proxied [off|expired|no-cache|no-store|private|no_last_modified|no_etag|auth|any] …<br>默认值: gzip_proxied off<br>作用域: http, server, location<br>Nginx作为反向代理的时候启用，开启或者关闭后端服务器返回的结果，匹配的前提是后端服务器必须要返回包含”Via”的 header头。<br>off - 关闭所有的代理结果数据的压缩<br>expired - 启用压缩，如果header头中包含 “Expires” 头信息<br>no-cache - 启用压缩，如果header头中包含 “Cache-Control:no-cache” 头信息<br>no-store - 启用压缩，如果header头中包含 “Cache-Control:no-store” 头信息<br>private - 启用压缩，如果header头中包含 “Cache-Control:private” 头信息<br>no_last_modified - 启用压缩,如果header头中不包含 “Last-Modified” 头信息<br>no_etag - 启用压缩 ,如果header头中不包含 “ETag” 头信息<br>auth - 启用压缩 , 如果header头中包含 “Authorization” 头信息<br>any - 无条件启用压缩</p>
+<p><strong>gzip_comp_level 4</strong><br>语法: gzip_comp_level 1..9<br>默认值: gzip_comp_level 1<br>作用域: http, server, location<br>gzip压缩比，1 压缩比最小处理速度最快，9 压缩比最大但处理最慢（传输快但比较消耗cpu）,所有一般设置了居中的4就可以了。</p>
+<p><strong>gzip_types</strong><br>默认值: gzip_types text/html<br>作用域: http, server, location<br>匹配MIME类型进行压缩，（无论是否指定）”text/html”类型总是会被压缩的。</p>
+<p><strong>gzip_vary on|off</strong><br>默认值: gzip_vary off<br>作用域: http, server, location<br>和http头有关系，加个vary头，给代理服务器用的，有的浏览器支持压缩，有的不支持，所以避免浪费不支持的也压缩，所以根据客户端的HTTP头来判断，是否需要压缩.</p>
+<p><strong>gzip_http_version</strong><br>默认值: gzip_http_version 1.1<br>作用域: http, server, location<br>gzip_http_version的设置，它的默认值是1.1，就是说对HTTP/1.1协议的请求才会进行gzip压缩</p>
+<p>Nginx在使用gzip压缩的时候，一般会配合开启客户端的Cache，不然每次请求Nginx都压缩一遍返回，增加服务器的性能开销；其实nginx还有支持预编译的压缩GzipPrecompression模块，就是事先手动的压缩好文件，请求过来的时候不需要动态压缩，直接读取压缩好的文件。<br>首先需要在编译配置的时候加上<strong>—with-http_gzip_static_module</strong>，然后在nginx.conf配置文件中加入<strong>gzip_static on;</strong>，然后就是需要对需要压缩的文件如.css,.js.html文件用gzip压缩为同名的gz文件,<br>具体大家可以参考<a href="http://lazyzhu.com/Nginx/How-to-use-nginx-GzipStatic-module-to-reduce-resource-usage.html" target="_blank" rel="external">巧用Nginx的GzipStatic模块来减少服务器资源占用</a>.</p>
+<h2 id="Proxy_Cache">Proxy Cache</h2><p>使用Nginx的proxy cache模块实现对静态文件的缓存<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">#设置proxy cache的保存硬盘路径为/data/nginx/cache/one;</span></span><br><span class="line">    <span class="comment">#keys_zone=one:10m 表示这个zone名称为one，分配的内存大小为10MB</span></span><br><span class="line">    <span class="comment">#levels=1:2 表示缓存目录的第一级目录是1个字符，第二级目录是2个字符，即</span></span><br><span class="line">    <span class="comment">#/data/nginx/cache/one/a/2b;</span></span><br><span class="line">    <span class="comment">#inactive=1d 表示这个zone中的缓存文件如果在1天内都没有被访问，那么文件会</span></span><br><span class="line">    <span class="comment">#被cache manager进程删除掉,默认设置为10m；</span></span><br><span class="line">    <span class="comment">#max_size=5g表示这个zone的硬盘容量为5GB</span></span><br><span class="line">    proxy_cache_path  /data/nginx/cache/one  levels=<span class="number">1</span>:<span class="number">2</span>   keys_zone=one:<span class="number">10</span>m inactive=<span class="number">1</span>d max_size=<span class="number">5</span>g;</span><br><span class="line">    </span><br><span class="line">    location ~ .(jpg|png|gif|css|js)$ &#123;</span><br><span class="line">        proxy_pass http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8001</span>;</span><br><span class="line">        <span class="comment">#设置资源缓存的zone</span></span><br><span class="line">        proxy_cache one;</span><br><span class="line">        <span class="comment">#设置缓存的key</span></span><br><span class="line">        proxy_cache_key <span class="variable">$host</span><span class="variable">$uri</span><span class="variable">$is_args</span><span class="variable">$args</span>;</span><br><span class="line">        <span class="comment">#设置状态码为200和304的响应可以进行缓存，并且缓存时间为10分钟</span></span><br><span class="line">        proxy_cache_valid <span class="number">200</span> <span class="number">304</span> <span class="number">10</span>m;</span><br><span class="line">        expires <span class="number">30</span>d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其他相关的配置详情可以查看<a href="http://wiki.nginx.org/HttpProxyModule#proxy_cache_path" target="_blank" rel="external">Nginx-wiki-HttpProxyModul</a>。</p>
+<h2 id="日志切割">日志切割</h2><p>通过信号来实现Nginx的日志切割：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TERM, INT   <span class="comment">#快速关闭</span></span><br><span class="line">QUIT	    <span class="comment">#从容关闭</span></span><br><span class="line">HUP         <span class="comment">#平滑重启，重新加载配置文件</span></span><br><span class="line">USR1	    <span class="comment">#重新打开日志文件，可以用于日志切割</span></span><br><span class="line">USR2	    <span class="comment">#平滑升级可执行程序。</span></span><br><span class="line">WINCH	    <span class="comment">#从容关闭工作进程</span></span><br></pre></td></tr></table></figure></p>
+<p>切割日志脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line"><span class="comment">#设置日志文件存放路径</span></span><br><span class="line"><span class="built_in">log</span>_path=<span class="string">"/usr/local/nginx/logs/"</span></span><br><span class="line"><span class="comment">#设置pid文件</span></span><br><span class="line">pid_path=<span class="string">"/usr/local/nginx/nginx.pid"</span></span><br><span class="line"><span class="comment">#重命名日志文件</span></span><br><span class="line">mv <span class="variable">$&#123;log_path&#125;</span>access.log <span class="variable">$&#123;log_path&#125;</span>access_$(date <span class="operator">-d</span> <span class="string">"yesterday"</span> +<span class="string">"%Y%m%d"</span>).log</span><br><span class="line"><span class="comment">#向nginx主进程发信号重新打开日志</span></span><br><span class="line"><span class="built_in">kill</span> -USR1 `cat <span class="variable">$&#123;pid_path&#125;</span>`</span><br></pre></td></tr></table></figure></p>
+<p>在定时作业crontab里加入下面一句话<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">0</span> * * * bash /usr/<span class="built_in">local</span>/nginx/nginx_<span class="built_in">log</span>_cut.sh</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Nginx/">Nginx</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yinrongping.github.io/2015/04/22/linux-nginx-3/" data-title="Nginx系列——Nginx配置与优化 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/04/19/linux-nginx-2/"  title="Nginx系列——主要模块">
+ <strong>下一篇：</strong><br/> 
+ <span>Nginx系列——主要模块
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/04/22/linux-nginx-3/" data-title="Nginx系列——Nginx配置与优化" data-url="http://yinrongping.github.io/2015/04/22/linux-nginx-3/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx配置与优化"><span class="toc-number">1.</span> <span class="toc-text">Nginx配置与优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#include使用"><span class="toc-number">1.1.</span> <span class="toc-text">include使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录配置(root&alias)"><span class="toc-number">1.2.</span> <span class="toc-text">目录配置(root&alias)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期设置(expires)"><span class="toc-number">1.3.</span> <span class="toc-text">过期设置(expires)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取客户端真实IP"><span class="toc-number">1.4.</span> <span class="toc-text">获取客户端真实IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡"><span class="toc-number">1.5.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问控制"><span class="toc-number">1.6.</span> <span class="toc-text">访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限制IP"><span class="toc-number">1.6.1.</span> <span class="toc-text">限制IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制目录"><span class="toc-number">1.6.2.</span> <span class="toc-text">限制目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制速度"><span class="toc-number">1.6.3.</span> <span class="toc-text">限制速度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制请求数"><span class="toc-number">1.6.4.</span> <span class="toc-text">限制请求数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpLimitReqModul"><span class="toc-number">1.6.5.</span> <span class="toc-text">HttpLimitReqModul</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpLimitConnModul"><span class="toc-number">1.6.6.</span> <span class="toc-text">HttpLimitConnModul</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动gzip压缩"><span class="toc-number">1.7.</span> <span class="toc-text">启动gzip压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy_Cache"><span class="toc-number">1.8.</span> <span class="toc-text">Proxy Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#日志切割"><span class="toc-number">1.9.</span> <span class="toc-text">日志切割</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/" target="_blank" title="一个基于内容分享的社区">简书</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me/" target="_blank" title="本博客使用的hexo主题的作者">Jacman</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Roy.Yin. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://yinrongping.github.io/about" target="_blank" title="Roy.Yin">Roy.Yin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"royin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
