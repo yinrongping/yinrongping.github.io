@@ -11,30 +11,30 @@
     
 
     
-    <meta name="description" content="Nginx系列——主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
+    <meta name="description" content="主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
 
 “=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求
 “^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式
 “~” 和 “~*” 为区分大小写匹配和不区分大小写匹配
-“!~”和“!~*” 为区分大小写不匹">
+“!~”和“!~*” 为区分大小写不匹配和不区分大小不匹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx系列——主要模块">
 <meta property="og:url" content="http://yinrongping.github.io/2015/04/19/linux-nginx-2/index.html">
 <meta property="og:site_name" content="Roy.Yin's Blog">
-<meta property="og:description" content="Nginx系列——主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
+<meta property="og:description" content="主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
 
 “=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求
 “^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式
 “~” 和 “~*” 为区分大小写匹配和不区分大小写匹配
-“!~”和“!~*” 为区分大小写不匹">
+“!~”和“!~*” 为区分大小写不匹配和不区分大小不匹">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx系列——主要模块">
-<meta name="twitter:description" content="Nginx系列——主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
+<meta name="twitter:description" content="主要模块location模块location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }
 
 “=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求
 “^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式
 “~” 和 “~*” 为区分大小写匹配和不区分大小写匹配
-“!~”和“!~*” 为区分大小写不匹">
+“!~”和“!~*” 为区分大小写不匹配和不区分大小不匹">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -109,11 +109,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx系列——主要模块"><span class="toc-number">1.</span> <span class="toc-text">Nginx系列——主要模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#location模块"><span class="toc-number">1.1.</span> <span class="toc-text">location模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rewrite模块"><span class="toc-number">1.2.</span> <span class="toc-text">Rewrite模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令："><span class="toc-number">1.2.1.</span> <span class="toc-text">if指令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break指令"><span class="toc-number">1.2.2.</span> <span class="toc-text">break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return指令"><span class="toc-number">1.2.3.</span> <span class="toc-text">return指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set指令"><span class="toc-number">1.2.4.</span> <span class="toc-text">set指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite指令"><span class="toc-number">1.2.5.</span> <span class="toc-text">rewrite指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite_log指令"><span class="toc-number">1.2.6.</span> <span class="toc-text">rewrite_log指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy模块"><span class="toc-number">1.3.</span> <span class="toc-text">Proxy模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upstream模块"><span class="toc-number">1.4.</span> <span class="toc-text">upstream模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置变量"><span class="toc-number">1.5.</span> <span class="toc-text">内置变量</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要模块"><span class="toc-number">1.</span> <span class="toc-text">主要模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#location模块"><span class="toc-number">1.1.</span> <span class="toc-text">location模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rewrite模块"><span class="toc-number">1.2.</span> <span class="toc-text">Rewrite模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令："><span class="toc-number">1.2.1.</span> <span class="toc-text">if指令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break指令"><span class="toc-number">1.2.2.</span> <span class="toc-text">break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return指令"><span class="toc-number">1.2.3.</span> <span class="toc-text">return指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set指令"><span class="toc-number">1.2.4.</span> <span class="toc-text">set指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite指令"><span class="toc-number">1.2.5.</span> <span class="toc-text">rewrite指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite_log指令"><span class="toc-number">1.2.6.</span> <span class="toc-text">rewrite_log指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy模块"><span class="toc-number">1.3.</span> <span class="toc-text">Proxy模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upstream模块"><span class="toc-number">1.4.</span> <span class="toc-text">upstream模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置变量"><span class="toc-number">1.5.</span> <span class="toc-text">内置变量</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Nginx系列——主要模块">Nginx系列——主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
+		<h1 id="主要模块">主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
 <ol>
 <li>“=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求</li>
 <li>“^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式</li>
@@ -228,7 +228,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx系列——主要模块"><span class="toc-number">1.</span> <span class="toc-text">Nginx系列——主要模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#location模块"><span class="toc-number">1.1.</span> <span class="toc-text">location模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rewrite模块"><span class="toc-number">1.2.</span> <span class="toc-text">Rewrite模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令："><span class="toc-number">1.2.1.</span> <span class="toc-text">if指令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break指令"><span class="toc-number">1.2.2.</span> <span class="toc-text">break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return指令"><span class="toc-number">1.2.3.</span> <span class="toc-text">return指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set指令"><span class="toc-number">1.2.4.</span> <span class="toc-text">set指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite指令"><span class="toc-number">1.2.5.</span> <span class="toc-text">rewrite指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite_log指令"><span class="toc-number">1.2.6.</span> <span class="toc-text">rewrite_log指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy模块"><span class="toc-number">1.3.</span> <span class="toc-text">Proxy模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upstream模块"><span class="toc-number">1.4.</span> <span class="toc-text">upstream模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置变量"><span class="toc-number">1.5.</span> <span class="toc-text">内置变量</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要模块"><span class="toc-number">1.</span> <span class="toc-text">主要模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#location模块"><span class="toc-number">1.1.</span> <span class="toc-text">location模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rewrite模块"><span class="toc-number">1.2.</span> <span class="toc-text">Rewrite模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if指令："><span class="toc-number">1.2.1.</span> <span class="toc-text">if指令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break指令"><span class="toc-number">1.2.2.</span> <span class="toc-text">break指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return指令"><span class="toc-number">1.2.3.</span> <span class="toc-text">return指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set指令"><span class="toc-number">1.2.4.</span> <span class="toc-text">set指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite指令"><span class="toc-number">1.2.5.</span> <span class="toc-text">rewrite指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rewrite_log指令"><span class="toc-number">1.2.6.</span> <span class="toc-text">rewrite_log指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy模块"><span class="toc-number">1.3.</span> <span class="toc-text">Proxy模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upstream模块"><span class="toc-number">1.4.</span> <span class="toc-text">upstream模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置变量"><span class="toc-number">1.5.</span> <span class="toc-text">内置变量</span></a></li></ol></li></ol>
  
   </div>
 

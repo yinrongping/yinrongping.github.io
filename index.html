@@ -230,7 +230,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="Nginx系列——主要模块">Nginx系列——主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
+        <h1 id="主要模块">主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
 <ol>
 <li>“=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求</li>
 <li>“^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式</li>
@@ -303,7 +303,7 @@
 </header>
     <div class="article-content">
         
-        <h1 id="Nginx系列——安装与配置">Nginx系列——安装与配置</h1><h2 id="介绍">介绍</h2><p>Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。</p>
+        <h1 id="安装与配置">安装与配置</h1><h2 id="介绍">介绍</h2><p>Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。</p>
 <h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nginx.org/download/nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#下载nginx安装包</span></span><br><span class="line">$ tar -xvf nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#解压安装包</span></span><br><span class="line">$ <span class="built_in">cd</span> nginx-<span class="number">1.6</span>.<span class="number">3</span>/</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx </span><br><span class="line">$ make </span><br><span class="line">$ make install    <span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
         
         

@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="Nginx系列——安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
-安装123456$ wget http://">
+    <meta name="description" content="安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
+安装123456$ wget http://nginx.org">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx系列——安装与配置">
 <meta property="og:url" content="http://yinrongping.github.io/2015/04/18/linux-nginx-1/index.html">
 <meta property="og:site_name" content="Roy.Yin's Blog">
-<meta property="og:description" content="Nginx系列——安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
-安装123456$ wget http://">
+<meta property="og:description" content="安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
+安装123456$ wget http://nginx.org">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx系列——安装与配置">
-<meta name="twitter:description" content="Nginx系列——安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
-安装123456$ wget http://">
+<meta name="twitter:description" content="安装与配置介绍Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。
+安装123456$ wget http://nginx.org">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -97,11 +97,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx系列——安装与配置"><span class="toc-number">1.</span> <span class="toc-text">Nginx系列——安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令"><span class="toc-number">1.3.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.4.</span> <span class="toc-text">配置</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装与配置"><span class="toc-number">1.</span> <span class="toc-text">安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令"><span class="toc-number">1.3.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.4.</span> <span class="toc-text">配置</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Nginx系列——安装与配置">Nginx系列——安装与配置</h1><h2 id="介绍">介绍</h2><p>Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。</p>
+		<h1 id="安装与配置">安装与配置</h1><h2 id="介绍">介绍</h2><p>Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。</p>
 <h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nginx.org/download/nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#下载nginx安装包</span></span><br><span class="line">$ tar -xvf nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#解压安装包</span></span><br><span class="line">$ <span class="built_in">cd</span> nginx-<span class="number">1.6</span>.<span class="number">3</span>/</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx </span><br><span class="line">$ make </span><br><span class="line">$ make install    <span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="命令">命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx -h   <span class="comment">#查看帮助</span></span><br><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx  <span class="comment">#启动Nginx</span></span><br><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx <span class="operator">-s</span> stop  <span class="comment">#立即停止进程(TERM信号)</span></span><br><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx <span class="operator">-s</span> quit  <span class="comment">#温和停止进程(QUIT信号)</span></span><br><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx <span class="operator">-s</span> reload <span class="comment">#重启</span></span><br><span class="line">$ sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx -t <span class="comment">#检查配置文件是否正确(默认conf中)</span></span><br><span class="line">$ sudo /sudo /usr/<span class="built_in">local</span>/nginx/sbin/nginx -t -c /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf  <span class="comment">#指定检查配置文件是否正确</span></span><br></pre></td></tr></table></figure>
@@ -173,7 +173,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx系列——安装与配置"><span class="toc-number">1.</span> <span class="toc-text">Nginx系列——安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令"><span class="toc-number">1.3.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.4.</span> <span class="toc-text">配置</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安装与配置"><span class="toc-number">1.</span> <span class="toc-text">安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令"><span class="toc-number">1.3.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.4.</span> <span class="toc-text">配置</span></a></li></ol></li></ol>
  
   </div>
 
