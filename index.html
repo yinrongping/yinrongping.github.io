@@ -80,6 +80,71 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/26/python-collection-1/" title="Python系列——集合" itemprop="url">Python系列——集合</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-26T13:39:25.000Z" itemprop="datePublished"> 发表于 2015-04-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Python_集合">Python 集合</h1><hr>
+<h2 id="列表——list">列表——list</h2><p>pyton中的列表，有点类似与java中的数组，也是有序的，可以对其新增，删除元素，但是它的灵活性和功能要比数组强大很多；list使用“[”和“]”表示定义一个列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">__author__ = <span class="string">'Roy.Yin'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span><br><span class="line">    python list</span><br><span class="line">'''</span></span><br><span class="line"><span class="comment">#定义一个空的列表</span></span><br><span class="line">names = []</span><br><span class="line"></span><br><span class="line">names = [<span class="string">'roy'</span>,<span class="string">'lucy'</span>,<span class="string">'lily'</span>,<span class="string">'jack'</span>]</span><br><span class="line"><span class="keyword">print</span> names</span><br><span class="line"></span><br><span class="line"><span class="comment">#末尾添加元素</span></span><br><span class="line">names.append(<span class="string">'sarah'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#index位子插入元素</span></span><br><span class="line">names.insert(<span class="number">2</span>,<span class="string">'mark'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除元素</span></span><br><span class="line">names.remove(<span class="string">'lucy'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取某个位子的元素</span></span><br><span class="line"><span class="keyword">print</span> names[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#index超过最大值会抛异常,list index out of range</span></span><br><span class="line"><span class="comment">#print names[8]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#list可以使用负数的index来表示倒序索引，如-1表示的倒数第1个元素</span></span><br><span class="line"><span class="keyword">print</span> names[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#以堆栈的方式弹出index位子的元素，默认index=0</span></span><br><span class="line">name = names.pop(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> name</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回元素所在的index值</span></span><br><span class="line"><span class="keyword">print</span> names.index(<span class="string">'jack'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回list的元素个数</span></span><br><span class="line"><span class="keyword">print</span> len(names)</span><br><span class="line"></span><br><span class="line"><span class="comment">#返回元素在列表中出现的次数</span></span><br><span class="line"><span class="keyword">print</span> names.count(<span class="string">'roy'</span>)</span><br><span class="line"></span><br><span class="line">names2 = [<span class="string">'tom'</span>,<span class="string">'sala'</span>]</span><br><span class="line"><span class="comment">#将name2中的元素添加倒names中</span></span><br><span class="line">names.extend(names2)</span><br><span class="line"><span class="keyword">print</span> names</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/26/python-collection-1/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Python/">Python</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python/">Python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/26/python-collection-1/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/26/python-collection-1/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/26/python-zen/" title="The Zen of Python——Python 之禅" itemprop="url">The Zen of Python——Python 之禅</a>
   </h1>
   <p class="article-author">By
@@ -694,81 +759,10 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/11/hexo-blog/" title="使用Hexo创建Github博客" itemprop="url">使用Hexo创建Github博客</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-11T02:37:42.000Z" itemprop="datePublished"> 发表于 2015-04-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="http://hexo.io/">hexo</a>是一款基于Node.js的静态博客框架,选择Hexo的理由是：足够简单，足够快速，足够强大。</p>
-<h2 id="Ubuntu下安装Hexo">Ubuntu下安装Hexo</h2><h3 id="安装Git">安装Git</h3><p>Ubuntu 12.10 自带Git，直接过；</p>
-<h3 id="安装Node-js">安装Node.js</h3><p>从<a href="http://nodejs.org/">nodeJS官网</a>下载最新源代码包： <strong>node-v0.12.0.tar.gz</strong>；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxf node-v0.<span class="number">12.0</span>.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> node-v0.<span class="number">12.0</span>/</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/node</span><br><span class="line">$ make &amp;&amp; make install</span><br><span class="line">$ PATH=<span class="string">"/usr/local/node/bin:<span class="variable">$PATH</span>"</span> 将node的路径加入PATH</span><br><span class="line">$ node -version 显示版本好，表示安装完毕</span><br></pre></td></tr></table></figure>
-<h3 id="安装Hexo">安装Hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install npm  安装npm</span><br><span class="line">$ sudo npm install -g hexo  安装hexo</span><br></pre></td></tr></table></figure>
-<h2 id="主题">主题</h2><p>选择hexo的另外一个原因就是主题非常丰富，当然这些都是hexo支持者的无私贡献</p>
-<blockquote>
-<ul>
-<li><a href="http://hexo.io/themes/">http://hexo.io/themes/</a></li>
-<li><a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a></li>
-</ul>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/04/11/hexo-blog/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/hexo/">hexo</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/hexo/">hexo</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/11/hexo-blog/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/11/hexo-blog/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
 
 </div>
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
@@ -795,7 +789,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Python/" title="Python">Python<sup>1</sup></a></li>
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
 		  
 		
 		  
@@ -816,15 +810,15 @@
 			
 		
 			
+				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 			
 		
 			
