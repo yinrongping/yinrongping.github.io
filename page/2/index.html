@@ -80,6 +80,72 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/12/ab-apache/" title="使用ab命令对博客进行性能压测" itemprop="url">使用ab命令对博客进行性能压测</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-12T07:37:42.000Z" itemprop="datePublished"> 发表于 2015-04-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>  刚刚搭建完博客，想着以后要是访问的人多了，博客顶不住怎么办（这个完全是借口，其实就是自己的三分钟热情），就顺便把Blog进行下压测，压测的命令很多（ab、http_load、webbench），那就这样，用最熟悉的那一个：ab，就这么愉快的决定了！</p>
+<h2 id="介绍">介绍</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ ab</span><br><span class="line">Usage: ab [options] [http[s]://]hostname[:port]/path</span><br><span class="line">Options are:</span><br><span class="line">    -n requests     压测所执行的总请求个数，默认<span class="number">1</span>个</span><br><span class="line">    -c concurrency  一次产生的请求个数，默认是一次一个，也就是并发请求的个数</span><br><span class="line">    -t timelimit    测试所进行的最大秒数，</span><br><span class="line">    <span class="operator">-s</span> timeout      每次请求的超时时间，</span><br><span class="line">                    默认<span class="number">30</span>秒</span><br><span class="line">    -p postfile     POST方式. Remember also to <span class="built_in">set</span> -T</span><br><span class="line">    -u putfile      PUT方式. Remember also to <span class="built_in">set</span> -T</span><br><span class="line">    -T content-type Content-type header to use <span class="keyword">for</span> POST/PUT data, eg.</span><br><span class="line">                    <span class="string">'application/x-www-form-urlencoded'</span></span><br><span class="line">                    Default is <span class="string">'text/plain'</span></span><br><span class="line">	-k              保持长连接 Use HTTP KeepAlive feature</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>一般来说，使用-c -n 就足够了！</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/12/ab-apache/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/12/ab-apache/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/12/ab-apache/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/11/hexo-blog/" title="使用Hexo创建Github博客" itemprop="url">使用Hexo创建Github博客</a>
   </h1>
   <p class="article-author">By
@@ -167,7 +233,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>4</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>5</sup></a></li>
 		  
 		
 		  
@@ -204,15 +270,15 @@
 			
 		
 			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>1</sup></a></li>
 			
 		
 			
