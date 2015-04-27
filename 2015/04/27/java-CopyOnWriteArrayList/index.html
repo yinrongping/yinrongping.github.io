@@ -1,0 +1,518 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JAVA集合系列——CopyOnWriteArrayList实现原理 | Roy.Yin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Roy.Yin">
+    
+
+    
+    <meta name="description" content="CopyOnWriteArrayList实现原理特点
+COW机制实现
+有序的
+线程安全
+读写分离
+
+数据结构COW就是Copy-On-Write，是程序设计的一种优化策略；当我们需要对一份共享的数据进行修改时，我们可以先将这份共享数据拷贝一份，待我们修改完成后再将新的数据放回原处，所以COW实现机制的容器也被叫做即写时复制容器。这样做的好处就是在多线程的环境中，我们获取元素的时候仍然不需要加锁。C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA集合系列——CopyOnWriteArrayList实现原理">
+<meta property="og:url" content="http://yinrongping.github.io/2015/04/27/java-CopyOnWriteArrayList/index.html">
+<meta property="og:site_name" content="Roy.Yin's Blog">
+<meta property="og:description" content="CopyOnWriteArrayList实现原理特点
+COW机制实现
+有序的
+线程安全
+读写分离
+
+数据结构COW就是Copy-On-Write，是程序设计的一种优化策略；当我们需要对一份共享的数据进行修改时，我们可以先将这份共享数据拷贝一份，待我们修改完成后再将新的数据放回原处，所以COW实现机制的容器也被叫做即写时复制容器。这样做的好处就是在多线程的环境中，我们获取元素的时候仍然不需要加锁。C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA集合系列——CopyOnWriteArrayList实现原理">
+<meta name="twitter:description" content="CopyOnWriteArrayList实现原理特点
+COW机制实现
+有序的
+线程安全
+读写分离
+
+数据结构COW就是Copy-On-Write，是程序设计的一种优化策略；当我们需要对一份共享的数据进行修改时，我们可以先将这份共享数据拷贝一份，待我们修改完成后再将新的数据放回原处，所以COW实现机制的容器也被叫做即写时复制容器。这样做的好处就是在多线程的环境中，我们获取元素的时候仍然不需要加锁。C">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Roy.Yin&#39;s Blog" title="Roy.Yin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Roy.Yin&#39;s Blog">Roy.Yin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">不要见怪，不要见外</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yinrongping.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/27/java-CopyOnWriteArrayList/" title="JAVA集合系列——CopyOnWriteArrayList实现原理" itemprop="url">JAVA集合系列——CopyOnWriteArrayList实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-27T14:01:47.000Z" itemprop="datePublished"> 发表于 2015-04-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CopyOnWriteArrayList实现原理"><span class="toc-number">1.</span> <span class="toc-text">CopyOnWriteArrayList实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">1.2.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取实现"><span class="toc-number">1.3.</span> <span class="toc-text">存取实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储"><span class="toc-number">1.3.2.</span> <span class="toc-text">存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取"><span class="toc-number">1.3.3.</span> <span class="toc-text">获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-number">1.3.4.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代"><span class="toc-number">1.3.5.</span> <span class="toc-text">迭代</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关"><span class="toc-number">1.4.</span> <span class="toc-text">相关</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="CopyOnWriteArrayList实现原理">CopyOnWriteArrayList实现原理</h1><h2 id="特点">特点</h2><ol>
+<li>COW机制实现</li>
+<li>有序的</li>
+<li>线程安全</li>
+<li>读写分离</li>
+</ol>
+<h2 id="数据结构">数据结构</h2><p>COW就是Copy-On-Write，是程序设计的一种优化策略；当我们需要对一份共享的数据进行修改时，我们可以先将这份共享数据拷贝一份，待我们修改完成后再将新的数据放回原处，所以COW实现机制的容器也被叫做即写时复制容器。这样做的好处就是在多线程的环境中，我们获取元素的时候仍然不需要加锁。CopyOnWriteArrayList底层和ArrayList一样，都是使用数组来保存所有元素的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//锁，在新增修改是实现并发控制</span></span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line"><span class="comment">//数组，用来保存元素，volatile实现多线程时的可见性</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">transient</span> Object[] array;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="存取实现">存取实现</h2><h3 id="初始化">初始化</h3><p>CopyOnWriteArrayList和ArrayList的初始化有些不同，ArrayList有几个初始化方法，包括设置初始容量和加载因子等，但是CopyOnWriteArrayList没有初始容量和加载因子设置，默认构造函数初始化的容器容量为0。为什么CopyOnWriteArrayList没有初始容量和加载因子呢？大家考虑下。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    setArray(<span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//集合构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">    Object[] elements = c.toArray();</span><br><span class="line">	<span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">	<span class="keyword">if</span> (elements.getClass() != Object[].class)</span><br><span class="line">	    elements = Arrays.copyOf(elements, elements.length, Object[].class);</span><br><span class="line">	setArray(elements);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">(E[] toCopyIn)</span> </span>&#123;</span><br><span class="line">    setArray(Arrays.copyOf(toCopyIn, toCopyIn.length, Object[].class));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="存储">存储</h3><p>新增元素的时候，仍然需要锁，不然并发环境下，每次新增的时候都拷贝一份副本，JVM受得了吗！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新增</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">	<span class="comment">//加锁</span></span><br><span class="line">	lock.lock();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    Object[] elements = getArray();</span><br><span class="line">	    <span class="keyword">int</span> len = elements.length;</span><br><span class="line">	    <span class="comment">//拷贝一个副本，并且容量+1</span></span><br><span class="line">	    Object[] newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);</span><br><span class="line">	    <span class="comment">//将新元素设置到副本中</span></span><br><span class="line">	    newElements[len] = e;</span><br><span class="line">	    <span class="comment">//将原始容器的引用指向这个副本</span></span><br><span class="line">	    setArray(newElements);</span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	    <span class="comment">//释放锁</span></span><br><span class="line">	    lock.unlock();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">	<span class="comment">//加锁</span></span><br><span class="line">	lock.lock();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    Object[] elements = getArray();</span><br><span class="line">	    <span class="keyword">int</span> len = elements.length;</span><br><span class="line">	    <span class="comment">//判断index是否越界</span></span><br><span class="line">	    <span class="keyword">if</span> (index &gt; len || index &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException(<span class="string">"Index: "</span>+index+</span><br><span class="line">						    <span class="string">", Size: "</span>+len);</span><br><span class="line">	    Object[] newElements;</span><br><span class="line">	    <span class="keyword">int</span> numMoved = len - index;</span><br><span class="line">	    <span class="comment">//是否需要元素移动</span></span><br><span class="line">	    <span class="keyword">if</span> (numMoved == <span class="number">0</span>)</span><br><span class="line">    	    <span class="comment">//拷贝一个副本，并扩容1位</span></span><br><span class="line">    		newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);</span><br><span class="line">	    <span class="keyword">else</span> &#123;</span><br><span class="line">    	    <span class="comment">//拷贝一个副本，并扩容1位</span></span><br><span class="line">    		newElements = <span class="keyword">new</span> Object[len + <span class="number">1</span>];</span><br><span class="line">    		<span class="comment">//将index前的元素拷贝到副本中</span></span><br><span class="line">    		System.arraycopy(elements, <span class="number">0</span>, newElements, <span class="number">0</span>, index);</span><br><span class="line">    		<span class="comment">//将index后的元素拷贝到副本中</span></span><br><span class="line">    		System.arraycopy(elements, index, newElements, index + <span class="number">1</span>,</span><br><span class="line">				 numMoved);</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="comment">//将新增的元素放到index位子</span></span><br><span class="line">	    newElements[index] = element;</span><br><span class="line">	    <span class="comment">//将原始容器引用指向副本</span></span><br><span class="line">	    setArray(newElements);</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	    <span class="comment">//解锁</span></span><br><span class="line">	    lock.unlock();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//替换</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">	<span class="comment">//加锁</span></span><br><span class="line">	lock.lock();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    Object[] elements = getArray();</span><br><span class="line">	    <span class="comment">//获取原来index位置的元素</span></span><br><span class="line">	    Object oldValue = elements[index];</span><br><span class="line">        <span class="comment">//对比新元素和来元素是否相等，如果不等</span></span><br><span class="line">	    <span class="keyword">if</span> (oldValue != element) &#123;</span><br><span class="line">    		<span class="keyword">int</span> len = elements.length;</span><br><span class="line">    		<span class="comment">//拷贝一个副本</span></span><br><span class="line">    		Object[] newElements = Arrays.copyOf(elements, len);</span><br><span class="line">    		<span class="comment">//将新元素设置到index位置</span></span><br><span class="line">    		newElements[index] = element;</span><br><span class="line">    		<span class="comment">//将原始容器的引用指向副本</span></span><br><span class="line">    		setArray(newElements);</span><br><span class="line">	    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    		<span class="comment">// Not quite a no-op; ensures volatile write semantics</span></span><br><span class="line">    		<span class="comment">//相等，将原始容器的引用指向副本，这里其实没变化，为什么要设置一遍呢？</span></span><br><span class="line">    		setArray(elements);</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="comment">//返回旧值</span></span><br><span class="line">	    <span class="keyword">return</span> (E)oldValue;</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	    <span class="comment">//解锁</span></span><br><span class="line">	    lock.unlock();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取">获取</h3><p>CopyOnWriteArrayList的获取元素十分的简单，没有加锁，即使是在多线程并发的环境下。所以CopyOnWriteArrayList的获取效率十分的高，适用在读大于写的场景中。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据索引获取元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (E)(getArray()[index]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除">删除</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据索引删除元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">	lock.lock();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    Object[] elements = getArray();</span><br><span class="line">	    <span class="keyword">int</span> len = elements.length;</span><br><span class="line">	    <span class="comment">//获取老元素</span></span><br><span class="line">	    Object oldValue = elements[index];</span><br><span class="line">	    <span class="comment">//需要移动元素的个数</span></span><br><span class="line">	    <span class="keyword">int</span> numMoved = len - index - <span class="number">1</span>;</span><br><span class="line">	    <span class="comment">//如果不需要移动，则拷贝一个副本，并且容量-1</span></span><br><span class="line">	    <span class="keyword">if</span> (numMoved == <span class="number">0</span>)</span><br><span class="line">		    setArray(Arrays.copyOf(elements, len - <span class="number">1</span>));</span><br><span class="line">	    <span class="keyword">else</span> &#123;</span><br><span class="line">	        <span class="comment">//新建一个数组</span></span><br><span class="line">    		Object[] newElements = <span class="keyword">new</span> Object[len - <span class="number">1</span>];</span><br><span class="line">    		<span class="comment">//将index前的元素拷贝至新数组</span></span><br><span class="line">    		System.arraycopy(elements, <span class="number">0</span>, newElements, <span class="number">0</span>, index);</span><br><span class="line">    		<span class="comment">//将index后的元素拷贝至新数组index位置和之后</span></span><br><span class="line">    		System.arraycopy(elements, index + <span class="number">1</span>, newElements, index,</span><br><span class="line">    				 numMoved);</span><br><span class="line">    		setArray(newElements);</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="keyword">return</span> (E)oldValue;</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	    lock.unlock();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据对象删除元素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> ReentrantLock lock = <span class="keyword">this</span>.lock;</span><br><span class="line">	<span class="comment">//加锁</span></span><br><span class="line">	lock.lock();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">	    Object[] elements = getArray();</span><br><span class="line">	    <span class="keyword">int</span> len = elements.length;</span><br><span class="line">	    <span class="keyword">if</span> (len != <span class="number">0</span>) &#123;</span><br><span class="line">    		<span class="comment">// Copy while searching for element to remove</span></span><br><span class="line">    		<span class="comment">// This wins in the normal case of element being present</span></span><br><span class="line">    		<span class="comment">// 新建一个容量为len-1的数组</span></span><br><span class="line">    		<span class="keyword">int</span> newlen = len - <span class="number">1</span>;</span><br><span class="line">    		Object[] newElements = <span class="keyword">new</span> Object[newlen];</span><br><span class="line">            </span><br><span class="line">    		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; newlen; ++i) &#123;</span><br><span class="line">    		    <span class="comment">//如果匹配到了</span></span><br><span class="line">    		    <span class="keyword">if</span> (eq(o, elements[i])) &#123;</span><br><span class="line">        			<span class="comment">// 依次将之后的元素拷贝到新数组中，然后返回ture</span></span><br><span class="line">        			<span class="keyword">for</span> (<span class="keyword">int</span> k = i + <span class="number">1</span>; k &lt; len; ++k)</span><br><span class="line">        			    newElements[k-<span class="number">1</span>] = elements[k];</span><br><span class="line">        			setArray(newElements);</span><br><span class="line">        			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    		    &#125; <span class="keyword">else</span></span><br><span class="line">    		        <span class="comment">//没有匹配就拷贝元素</span></span><br><span class="line">    			    newElements[i] = elements[i];</span><br><span class="line">    		&#125;</span><br><span class="line">    </span><br><span class="line">    		<span class="comment">// 对最后一个元素进行匹配</span></span><br><span class="line">    		<span class="keyword">if</span> (eq(o, elements[newlen])) &#123;</span><br><span class="line">    		    setArray(newElements);</span><br><span class="line">    		    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    		&#125;</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">	    <span class="comment">//解锁</span></span><br><span class="line">	    lock.unlock();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除索引范围内的元素</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">removeRange</span><span class="params">(<span class="keyword">int</span> fromIndex, <span class="keyword">int</span> toIndex)</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代">迭代</h3><p>CopyOnWriteArrayList也有迭代器，但是是阉割版的,迭代器中不支持调用add，set，remove等方法，否则会抛出异常；当使用迭代器时，迭代器会使用一个引用指向当前的原始数据，所以并发环境下，其他线程修改元素数据的时候，不会影响到迭代的数据，是线程安全的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">COWIterator</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">ListIterator</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="javadoc">/** Snapshot of the array **/</span></span><br><span class="line">    <span class="comment">//用于保存迭代时的数据</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object[] snapshot;</span><br><span class="line">    <span class="javadoc">/** Index of element to be returned by subsequent call to next.  */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cursor;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">COWIterator</span><span class="params">(Object[] elements, <span class="keyword">int</span> initialCursor)</span> </span>&#123;</span><br><span class="line">        cursor = initialCursor;</span><br><span class="line">        snapshot = elements;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="相关">相关</h2><p>CopyOnWriteArrayList适用于读大于写的场景中，不适合大量的写操作，因为会产生内存大量占用的问题和数据一致性的问题；比如我们要添加多个元素到CopyOnWriteArrayList中的时候，避免使用循环add方法的方式，而是采用addAll的方式，这样就不会产生大量的内存占用，甚至内存溢出；在数据一致性要求比较严格的情景，也要避免使用CopyOnWriteArrayList，要知道CopyOnWriteArrayList只能保证数据的最终一致性，而不能保证实时的数据一致性。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ArrayList/">ArrayList</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yinrongping.github.io/2015/04/27/java-CopyOnWriteArrayList/" data-title="JAVA集合系列——CopyOnWriteArrayList实现原理 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/04/27/java-linkedHashSet/"  title="JAVA集合系列——LinkedHashSet实现原理">
+ <strong>下一篇：</strong><br/> 
+ <span>JAVA集合系列——LinkedHashSet实现原理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/04/27/java-CopyOnWriteArrayList/" data-title="JAVA集合系列——CopyOnWriteArrayList实现原理" data-url="http://yinrongping.github.io/2015/04/27/java-CopyOnWriteArrayList/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CopyOnWriteArrayList实现原理"><span class="toc-number">1.</span> <span class="toc-text">CopyOnWriteArrayList实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#特点"><span class="toc-number">1.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构"><span class="toc-number">1.2.</span> <span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存取实现"><span class="toc-number">1.3.</span> <span class="toc-text">存取实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储"><span class="toc-number">1.3.2.</span> <span class="toc-text">存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取"><span class="toc-number">1.3.3.</span> <span class="toc-text">获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-number">1.3.4.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代"><span class="toc-number">1.3.5.</span> <span class="toc-text">迭代</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关"><span class="toc-number">1.4.</span> <span class="toc-text">相关</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>6</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/" target="_blank" title="一个基于内容分享的社区">简书</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me/" target="_blank" title="本博客使用的hexo主题的作者">Jacman</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Roy.Yin. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://yinrongping.github.io/about" target="_blank" title="Roy.Yin">Roy.Yin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"royin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
