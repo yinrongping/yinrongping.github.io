@@ -80,6 +80,78 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/16/java-ArrayList/" title="JAVA集合系列——ArrayList实现原理" itemprop="url">JAVA集合系列——ArrayList实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-16T12:23:42.000Z" itemprop="datePublished"> 发表于 2015-04-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="ArrayList的实现原理">ArrayList的实现原理</h1><h2 id="特点">特点</h2><ol>
+<li>List接口的可变数组实现</li>
+<li>允许null值</li>
+<li>非线程安全</li>
+<li>有序</li>
+<li>查询快，插入慢，删除慢</li>
+</ol>
+<h2 id="数据结构">数据结构</h2><p>ArrayList的数据结构比较简单，底层使用数组保存所有的元素，所有的操作也是在这个数组上.然后使用一个size保存了当前ArrayList的元素个数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包含元素的个数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="comment">//底层数组</span></span><br><span class="line"><span class="comment">//transient:表示序列化的时候不包含此属性</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> Object[] elementData;</span><br></pre></td></tr></table></figure></p>
+<h2 id="ArrayList存取实现">ArrayList存取实现</h2><h3 id="初始化">初始化</h3><p>ArrayList有3个构造函数：无参构造，容量设定构造，列表设定构造，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无参构造，默认容量为10</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//容量设定构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">	<span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//列表设定构造，将列表值置入数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line"> elementData = c.toArray();</span><br><span class="line">	size = elementData.length;</span><br><span class="line">	<span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></span><br><span class="line">	<span class="comment">// 如果toArray()返回不是Object[]，转为Object[]</span></span><br><span class="line">	<span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">      elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/16/java-ArrayList/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ArrayList/">ArrayList</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/16/java-ArrayList/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/16/java-ArrayList/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/15/java-hashmap/" title="JAVA集合系列——HashMap实现原理" itemprop="url">JAVA集合系列——HashMap实现原理</a>
   </h1>
   <p class="article-author">By
@@ -299,7 +371,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>6</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>7</sup></a></li>
 		  
 		
 		  
@@ -349,6 +421,10 @@
 		
 			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CopyOnWriteArraySet/" title="CopyOnWriteArraySet">CopyOnWriteArraySet<sup>1</sup></a></li>
 			
 		
 			
