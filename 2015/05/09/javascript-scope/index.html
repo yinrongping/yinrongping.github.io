@@ -4,28 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>The Zen of Python——Python 之禅 | Roy.Yin&#39;s Blog</title>
+    <title>JavaScript系列——作用域和作用域链 | Roy.Yin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Roy.Yin">
     
 
     
-    <meta name="description" content="The Zen of Python —— Python 之禅Beautiful is better than ugly.优美胜于丑陋（Python 以编写优美的代码为目标）.
-Explicit is better than implicit.明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）.
-Simple is better than complex.简洁胜于复杂（优美的代码应当是简洁的">
+    <meta name="description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The Zen of Python——Python 之禅">
-<meta property="og:url" content="http://yinrongping.github.io/2015/04/26/python-zen/index.html">
+<meta property="og:title" content="JavaScript系列——作用域和作用域链">
+<meta property="og:url" content="http://yinrongping.github.io/2015/05/09/javascript-scope/index.html">
 <meta property="og:site_name" content="Roy.Yin's Blog">
-<meta property="og:description" content="The Zen of Python —— Python 之禅Beautiful is better than ugly.优美胜于丑陋（Python 以编写优美的代码为目标）.
-Explicit is better than implicit.明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）.
-Simple is better than complex.简洁胜于复杂（优美的代码应当是简洁的">
+<meta property="og:description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Zen of Python——Python 之禅">
-<meta name="twitter:description" content="The Zen of Python —— Python 之禅Beautiful is better than ugly.优美胜于丑陋（Python 以编写优美的代码为目标）.
-Explicit is better than implicit.明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）.
-Simple is better than complex.简洁胜于复杂（优美的代码应当是简洁的">
+<meta name="twitter:title" content="JavaScript系列——作用域和作用域链">
+<meta name="twitter:description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -84,14 +78,14 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/26/python-zen/" title="The Zen of Python——Python 之禅" itemprop="url">The Zen of Python——Python 之禅</a>
+      <a href="/2015/05/09/javascript-scope/" title="JavaScript系列——作用域和作用域链" itemprop="url">JavaScript系列——作用域和作用域链</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-26T12:55:52.000Z" itemprop="datePublished"> 发表于 2015-04-26</time>
+    <time datetime="2015-05-09T15:00:46.000Z" itemprop="datePublished"> 发表于 2015-05-09</time>
     
   </p>
 </header>
@@ -100,25 +94,27 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The_Zen_of_Python_——_Python_之禅"><span class="toc-number">1.</span> <span class="toc-text">The Zen of Python —— Python 之禅</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.2.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="The_Zen_of_Python_——_Python_之禅">The Zen of Python —— Python 之禅</h1><p>Beautiful is better than ugly.<br>优美胜于丑陋（Python 以编写优美的代码为目标）.</p>
-<p>Explicit is better than implicit.<br>明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）.</p>
-<p>Simple is better than complex.<br>简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）.</p>
-<p>Complex is better than complicated.<br>复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）.</p>
-<p>Flat is better than nested.<br>扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）.</p>
-<p>Sparse is better than dense.<br>间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）.</p>
-<p>Readability counts.<br>可读性很重要（优美的代码是可读的）.</p>
+		<h1 id="JavaScript系列——作用域和作用域链">JavaScript系列——作用域和作用域链</h1><h2 id="作用域">作用域</h2><p>JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(x, y)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 不推荐写法: 隐式全局变量</span></span><br><span class="line">   result = x + y;  <span class="comment">//优化：var result = x + y; 使用var</span></span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反例，勿使用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//相当于：</span></span><br><span class="line">    <span class="comment">//var a = 0 ;</span></span><br><span class="line">    <span class="comment">//b = 0; 隐式全局变量</span></span><br><span class="line">    <span class="keyword">var</span> a = b = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>Special cases aren’t special enough to break the rules.Although practicality beats purity.<br>即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）.</p>
-<p>Errors should never pass silently.Unless explicitly silenced.<br>不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）.</p>
-<p>In the face of ambiguity, refuse the temptation to guess.There should be one— and preferably only one —obvious way to do it.Although that way may not be obvious at first unless you’re Dutch.<br>当存在多种可能，不要尝试去猜测,而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）</p>
-<p>Now is better than never.Although never is often better than <em>right</em> now.<br>做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）</p>
-<p>If the implementation is hard to explain, it’s a bad idea.If the implementation is easy to explain, it may be a good idea.<br>如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）</p>
-<p>Namespaces are one honking great idea — let’s do more of those!<br>命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）</p>
-<p>来源：<a href="http://blog.csdn.net/gzlaiyonghao/article/details/2151918" target="_blank" rel="external">http://blog.csdn.net/gzlaiyonghao/article/details/2151918</a></p>
+<p>隐式全局变量和明确定义的全局变量间有些小的差异，就是通过delete操作符让变量未定义的能力。</p>
+<ul>
+<li>通过var创建的全局变量（任何函数之外的程序中创建）是不能被删除的。</li>
+<li>无var创建的隐式全局变量（无视是否在函数中创建）是能被删除的。</li>
+</ul>
+<p>这表明，在技术上，隐式全局变量并不是真正的全局变量，但它们是全局对象的属性。属性是可以通过delete操作符删除的，而变量是不能的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义三个全局变量</span></span><br><span class="line"><span class="keyword">var</span> global_var = <span class="number">1</span>;</span><br><span class="line">global_novar = <span class="number">2</span>; <span class="comment">// 反面教材</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">   global_fromfunc = <span class="number">3</span>; <span class="comment">// 反面教材</span></span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 试图删除</span></span><br><span class="line"><span class="keyword">delete</span> global_var; <span class="comment">// false</span></span><br><span class="line"><span class="keyword">delete</span> global_novar; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">delete</span> global_fromfunc; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试该删除</span></span><br><span class="line"><span class="keyword">typeof</span> global_var; <span class="comment">// "number"</span></span><br><span class="line"><span class="keyword">typeof</span> global_novar; <span class="comment">// "undefined"</span></span><br><span class="line"><span class="keyword">typeof</span> global_fromfunc; <span class="comment">// "undefined"</span></span><br></pre></td></tr></table></figure>
+<h2 id="预编译">预编译</h2><p>JavaScript解析过程可以分为编译和执行两个阶段。编译也就是我们常说的JavaScript预处理（即预编译）</p>
+<ul>
+<li>先预定义var变量，在预定义function函数</li>
+<li>变量的预定义只做变量声明，不做初始化，此时值为undefined</li>
+<li>function函数也做变量声明，值初始化为函数体</li>
+<li>匿名函数不做预编译</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alert(om);       <span class="comment">// 显示 undefined</span></span><br><span class="line"><span class="keyword">var</span> om = <span class="string">'abc'</span>;</span><br><span class="line">alert(om);       <span class="comment">// 显示 abc</span></span><br><span class="line"></span><br><span class="line">alert(sum);</span><br><span class="line"><span class="comment">/*</span><br><span class="line">   返回：</span><br><span class="line">   function sum(a,b)&#123;</span><br><span class="line">        return a+b;</span><br><span class="line">   &#125; </span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(a,b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//返回：3</span></span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -126,13 +122,13 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Python/">Python</a>
+  <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Python/">Python</a>
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
   </div>
 
 </div>
@@ -141,7 +137,7 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yinrongping.github.io/2015/04/26/python-zen/" data-title="The Zen of Python——Python 之禅 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/" data-title="JavaScript系列——作用域和作用域链 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -154,19 +150,11 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/26/python-collection-1/" title="Python基础系列——集合">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Python基础系列——集合</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/23/java-LinkedHashMap/"  title="JAVA集合系列——LinkedHashMap实现原理">
+<a href="/2015/05/07/java-CopyOnWriteArraySet/"  title="JAVA集合系列——CopyOnWriteArraySet实现原理">
  <strong>下一篇：</strong><br/> 
- <span>JAVA集合系列——LinkedHashMap实现原理
+ <span>JAVA集合系列——CopyOnWriteArraySet实现原理
 </span>
 </a>
 </div>
@@ -175,7 +163,7 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/26/python-zen/" data-title="The Zen of Python——Python 之禅" data-url="http://yinrongping.github.io/2015/04/26/python-zen/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/09/javascript-scope/" data-title="JavaScript系列——作用域和作用域链" data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/"></div>
 </section>
 
 
@@ -185,7 +173,7 @@ Simple is better than complex.简洁胜于复杂（优美的代码应当是简�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The_Zen_of_Python_——_Python_之禅"><span class="toc-number">1.</span> <span class="toc-text">The Zen of Python —— Python 之禅</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.2.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
  
   </div>
 
