@@ -80,6 +80,112 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/10/linux-char/" title="Shell特殊字符小结" itemprop="url">Shell特殊字符小结</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-10T08:36:41.000Z" itemprop="datePublished"> 发表于 2015-05-10</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Shell特殊字符小结">Shell特殊字符小结</h1><hr>
+<h2 id="shell通配符">shell通配符</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:left">匹配 0 或多个字符</td>
+<td style="text-align:left">a*b  a与b之间可以有任意长度的任意字符, 也可以一个也没有,如ab,acb,a22b</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:left">匹配任意一个字符</td>
+<td style="text-align:left">a?b  a与b之间必须也只能有一个字符, 可以是任意字符, 如aab, abb, acb, a0b</td>
+</tr>
+<tr>
+<td style="text-align:center">[list]</td>
+<td style="text-align:left">匹配 list 中的任意单一字符</td>
+<td style="text-align:left">a[xyz]b   a与b之间必须也只能有一个字符, 但只能是 x 或 y 或 z, 如: axb, ayb, azb。</td>
+</tr>
+<tr>
+<td style="text-align:center">[!list]或[^list]</td>
+<td style="text-align:left">匹配 list 中的任意单一字符</td>
+<td style="text-align:left">a[!0-9]b  a与b之间必须也只能有一个字符, 但不能是阿拉伯数字, 如axb, aab, a-b</td>
+</tr>
+<tr>
+<td style="text-align:center">[x-y]</td>
+<td style="text-align:left">匹配 x-y 中的任意单一字符 如：[0-9] [a-z]</td>
+<td style="text-align:left">a[0-9]b  0与9之间必须也只能有一个字符 如a0b, a1b… a9b</td>
+</tr>
+<tr>
+<td style="text-align:center">{string1,string2,…}</td>
+<td style="text-align:left">匹配 sring1 或 string2 (或更多)其一字符串</td>
+<td style="text-align:left">a{abc,xyz,123}b    a与b之间只能是abc或xyz或123这三个字符串之一</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：通配符看起来有点象正则表达式语句，但是它与正则表达式不同的，不能相互混淆,把通配符理解为shell 特殊代号字符就可.</strong></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/10/linux-char/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Linux/">Linux</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/10/linux-char/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/10/linux-char/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/09/javascript-scope/" title="JavaScript系列——作用域和作用域链" itemprop="url">JavaScript系列——作用域和作用域链</a>
   </h1>
   <p class="article-author">By
@@ -695,71 +801,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/18/linux-nginx-1/" title="Nginx系列——安装与配置" itemprop="url">Nginx系列——安装与配置</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-18T14:42:07.000Z" itemprop="datePublished"> 发表于 2015-04-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="安装与配置">安装与配置</h1><h2 id="介绍">介绍</h2><p>Nginx是由俄罗斯软件工程师IgorSysoev开发的一个高性能的HTTP和反向代理服务器，具备IMAP/POP3和SMTP服务器功能。Nginx最大的特点是对高并发的支持和高效的负载均衡，在高并发的需求场景下，是Apache服务器不错的替代品。目前，包括新浪、腾讯等知名网站已经开始使用Nginx作为Web应用服务器。</p>
-<h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://nginx.org/download/nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#下载nginx安装包</span></span><br><span class="line">$ tar -xvf nginx-<span class="number">1.6</span>.<span class="number">3</span>.tar.gz <span class="comment">#解压安装包</span></span><br><span class="line">$ <span class="built_in">cd</span> nginx-<span class="number">1.6</span>.<span class="number">3</span>/</span><br><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/nginx </span><br><span class="line">$ make </span><br><span class="line">$ make install    <span class="comment">#安装</span></span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/04/18/linux-nginx-1/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Nginx/">Nginx</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/18/linux-nginx-1/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/18/linux-nginx-1/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -786,7 +827,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
 		  
 		
 		  
@@ -815,6 +856,10 @@
 			
 		
 			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
 			
 		
@@ -828,10 +873,6 @@
 		
 			
 				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
 			
 		
 			
