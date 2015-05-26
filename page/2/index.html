@@ -80,6 +80,79 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/19/linux-nginx-2/" title="Nginx系列——主要模块" itemprop="url">Nginx系列——主要模块</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-19T09:54:48.000Z" itemprop="datePublished"> 发表于 2015-04-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="主要模块">主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
+<ol>
+<li>“=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求</li>
+<li>“^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式</li>
+<li>“~” 和 “~*” 为区分大小写匹配和不区分大小写匹配</li>
+<li>“!~”和“!~*” 为区分大小写不匹配和不区分大小不匹配</li>
+<li>“@xxx” 表示定义location区段名，客户端不能访问，内部产生的请求可以,例如try_files或error_page</li>
+<li>“/” 表示通用匹配，任何请求都会匹配到<br>如果多个location匹配按什么顺序呢？Nginx首先会按“=”去匹配，匹配不了然后按照“^~”匹配，如果还是匹配不了，就会按location的顺序匹配其他的规则，最后还是没匹配就使用“/”通用匹配。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#精确匹配，不能用正则</span></span><br><span class="line">location = /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#URI定位匹配，可用正则</span></span><br><span class="line">location ^~ /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#正则匹配 区分大小写</span></span><br><span class="line">location ~ /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#正则匹配 不区分大小写</span></span><br><span class="line">location ~* /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#匹配所有</span></span><br><span class="line">location  / &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/19/linux-nginx-2/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Nginx/">Nginx</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/19/linux-nginx-2/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/19/linux-nginx-2/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/18/linux-nginx-1/" title="Nginx系列——安装与配置" itemprop="url">Nginx系列——安装与配置</a>
   </h1>
   <p class="article-author">By
@@ -511,7 +584,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 		  
 		
 		  
@@ -552,6 +625,10 @@
 			
 		
 			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>2</sup></a></li>
 			
 		
@@ -561,10 +638,6 @@
 		
 			
 				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
 			
 		
 			

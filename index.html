@@ -80,6 +80,121 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/26/javascript-datatype/" title="JavaScript系列——数据类型" itemprop="url">JavaScript系列——数据类型</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-26T13:31:51.000Z" itemprop="datePublished"> 发表于 2015-05-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="JavaScript系列——数据类型">JavaScript系列——数据类型</h1><h2 id="语法">语法</h2><ul>
+<li>区分大小写<br>ECMAScript 中的一切(变量、函数名和操作符)都区分大小写</li>
+<li>标识符<br>所谓标识符,就是指变量、函数、属性的名字,或者函数的参数：<br>a.第一个字符必须是一个字母、下划线(_)或一个美元符号($)<br>b.其他字符可以是字母、下划线、美元符号或数字</li>
+<li>严格模式<br>ECMAScript 5 引入了严格模式(strict-mode),可以在脚本的顶部加入，也可以在函数的内部加入。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="pi">    "use strict"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="变量">变量</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局变量</span></span><br><span class="line"><span class="keyword">var</span> message;  <span class="comment">//值为undefined</span></span><br><span class="line"><span class="keyword">var</span> maeesage = <span class="string">'hello'</span>;</span><br><span class="line">message = <span class="number">100</span>; <span class="comment">//有效，但是不推荐，并且不管位置在哪，定义的都为全局变量，不利于维护</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//局部变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123; </span><br><span class="line">    <span class="keyword">var</span> msg = <span class="string">"hi"</span>; <span class="comment">// 局部变量 </span></span><br><span class="line">&#125; </span><br><span class="line">test(); </span><br><span class="line">alert(msg); <span class="comment">//错误！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//同时定义多个变量，用逗号隔开</span></span><br><span class="line"><span class="keyword">var</span> message = <span class="string">"hi"</span>, </span><br><span class="line">    found = <span class="literal">false</span>, </span><br><span class="line">    age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型">数据类型</h2><p>ECMAScript 中有 5 种简单数据类型（也称为基本数据类型）：Undefined、Null、Boolean、Number<br>和 String；还有 1 种复杂数据类型——Object，Object本质上是由一组无序的名值对组成的。</p>
+<h3 id="typeof操作符">typeof操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"undefined"</span>——如果这个值未定义</span><br><span class="line"><span class="string">"boolean"</span>——如果这个值是布尔值</span><br><span class="line"><span class="string">"string"</span>——如果这个值是字符串</span><br><span class="line"><span class="string">"number"</span>——如果这个值是数值</span><br><span class="line"><span class="string">"object"</span>——如果这个值是对象 或 <span class="literal">null</span>，<span class="literal">null</span>也是object</span><br><span class="line"><span class="string">"function"</span>——如果这个值是函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> message; <span class="comment">// 这个变量声明之后默认取得了 undefined 值 </span></span><br><span class="line"><span class="comment">// 下面这个变量并没有声明 </span></span><br><span class="line"><span class="comment">// var age </span></span><br><span class="line">alert(<span class="keyword">typeof</span> message);     <span class="comment">// "undefined" </span></span><br><span class="line">alert(age);                <span class="comment">// 产生错误 </span></span><br><span class="line">alert(<span class="keyword">typeof</span> age);         <span class="comment">// "undefined"</span></span><br><span class="line"><span class="comment">//因此，判断一个对象是否声明，可以使用typeof，非严格模式下是不会报错的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined 值是派生自 null 值的，所以相等</span></span><br><span class="line">alert(<span class="literal">null</span> == <span class="literal">undefined</span>);    <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="Boolean类型">Boolean类型</h3><p>true 不一定等于 1，而 false 也不一定等于 0。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th style="text-align:center">转化为true</th>
+<th style="text-align:center">转化为false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boolean</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td>String</td>
+<td style="text-align:center">任何非空字符串</td>
+<td style="text-align:center">“”（空字符串）</td>
+</tr>
+<tr>
+<td>Number</td>
+<td style="text-align:center">任何非零数字值（包括无穷大）</td>
+<td style="text-align:center">0和NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td style="text-align:center">非null对象</td>
+<td style="text-align:center">null</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td style="text-align:center">—</td>
+<td style="text-align:center">undefined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Number类型">Number类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> intNum = <span class="number">55</span>;            <span class="comment">// 整数 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> octalNum1 = <span class="number">070</span>;        <span class="comment">// 八进制的 56 </span></span><br><span class="line"><span class="keyword">var</span> octalNum2 = <span class="number">079</span>;        <span class="comment">// 无效的八进制数值——解析为 79 </span></span><br><span class="line"><span class="keyword">var</span> octalNum3 = <span class="number">08</span>;         <span class="comment">// 无效的八进制数值——解析为 8 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hexNum1 = <span class="number">0xA</span>;          <span class="comment">// 十六进制的 10 </span></span><br><span class="line"><span class="keyword">var</span> hexNum2 = <span class="number">0x1f</span>;         <span class="comment">// 十六进制的 31 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> floatNum1 = <span class="number">1.1</span>; </span><br><span class="line"><span class="keyword">var</span> floatNum2 = <span class="number">0.1</span>; </span><br><span class="line"><span class="keyword">var</span> floatNum3 = .<span class="number">1</span>;       <span class="comment">// 有效，但不推荐 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果浮点数值本身表示的就是一个整数（如 1.0），那么该值也会被转换为整数</span></span><br><span class="line"><span class="keyword">var</span> floatNum1 = <span class="number">1.</span>;        <span class="comment">// 小数点后面没有数字——解析为 1 </span></span><br><span class="line"><span class="keyword">var</span> floatNum2 = <span class="number">10.0</span>;      <span class="comment">// 整数——解析为 10 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> floatNum = <span class="number">3.125e7</span>;   <span class="comment">// 等于 31250000 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不用用浮点数做只有的相等比较，会存在精度的问题</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">0.1</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">0.2</span></span><br><span class="line"><span class="keyword">if</span> (a + b == <span class="number">0.3</span>)&#123;          <span class="comment">// 不要做这样的测试！ </span></span><br><span class="line">    alert(<span class="string">"You got 0.3."</span>); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// Number.MIN_VALUE -&gt;  5e-324 最小值</span></span><br><span class="line"><span class="comment">// Number.MAX_VALUE -&gt;  1.7976931348623157e+308 最大值</span></span><br><span class="line"><span class="comment">// isFinite ： 判断数值是否在有效的范围中</span></span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">Number</span>.MAX_VALUE + <span class="built_in">Number</span>.MAX_VALUE; </span><br><span class="line">alert(<span class="built_in">isFinite</span>(result));   <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// NaN，即非数值（Not a Number）是一个特殊的数值，这个数值用于表示一个本来要返回数值的操作数</span></span><br><span class="line"><span class="comment">// 未返回数值的情况（这样就不会抛出错误了）</span></span><br><span class="line"><span class="comment">// 1.任何涉及 NaN 的操作（例如 NaN/10）都会返回 NaN</span></span><br><span class="line"><span class="comment">// 2.NaN 与任何值都不相等，包括 NaN 本身</span></span><br><span class="line">alert(<span class="literal">NaN</span> == <span class="literal">NaN</span>);     <span class="comment">//false </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//在基于对象调用 isNaN()函数时，会首先调用对象的valueOf()方法，然后确定该方法返回的值</span></span><br><span class="line"><span class="comment">//是否可以转换为数值。如果不能，则基于这个返回值再调用 toString()方法，再测试返回值。</span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>));         <span class="comment">//true </span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="number">10</span>));          <span class="comment">//false（10 是一个数值） </span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">"10"</span>));        <span class="comment">//false（可以被转换成数值 10） </span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="string">"blue"</span>));      <span class="comment">//true（不能转换成数值） </span></span><br><span class="line">alert(<span class="built_in">isNaN</span>(<span class="literal">true</span>));        <span class="comment">//false（可以被转换成数值 1）</span></span><br></pre></td></tr></table></figure>
+<h3 id="数值转化">数值转化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">Number</span>(<span class="string">"Hello world!"</span>);     <span class="comment">//NaN </span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">Number</span>(<span class="string">""</span>);                 <span class="comment">//0 </span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">Number</span>(<span class="string">"000011"</span>);           <span class="comment">//11 </span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">Number</span>(<span class="literal">true</span>);               <span class="comment">//1 </span></span><br><span class="line"><span class="keyword">var</span> num5 = <span class="built_in">Number</span>(<span class="literal">null</span>);               <span class="comment">//0</span></span><br><span class="line"><span class="keyword">var</span> num6 = <span class="built_in">Number</span>(<span class="literal">undefined</span>);          <span class="comment">//NaN</span></span><br><span class="line"><span class="keyword">var</span> num7 = <span class="built_in">Number</span>(<span class="number">1.2</span>);                <span class="comment">//1.2</span></span><br><span class="line"><span class="keyword">var</span> num8 = <span class="built_in">Number</span>(<span class="number">0xf</span>);                <span class="comment">//15</span></span><br></pre></td></tr></table></figure>
+<p>如果是对象，则调用对象的  valueOf()方法，然后依照前面的规则转换返回的值。如果转换<br>的结果是  NaN，则调用对象的  toString()方法，然后再次依照前面的规则转换返回的字符<br>串值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(<span class="string">"1234blue"</span>);    <span class="comment">// 1234 </span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(<span class="string">""</span>);            <span class="comment">// NaN </span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">parseInt</span>(<span class="string">"0xA"</span>);         <span class="comment">// 10（十六进制数） </span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">parseInt</span>(<span class="number">22.5</span>);          <span class="comment">// 22 </span></span><br><span class="line"><span class="keyword">var</span> num5 = <span class="built_in">parseInt</span>(<span class="string">"070"</span>);         <span class="comment">// 56（八进制数） </span></span><br><span class="line"><span class="keyword">var</span> num6 = <span class="built_in">parseInt</span>(<span class="string">"70"</span>);          <span class="comment">// 70（十进制数） </span></span><br><span class="line"><span class="keyword">var</span> num7 = <span class="built_in">parseInt</span>(<span class="string">"0xf"</span>);         <span class="comment">// 15（十六进制数）</span></span><br><span class="line"><span class="comment">//ECMAScript 3 认为是 56（八进制），ECMAScript 5 认为是 70（十进制） </span></span><br><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseInt</span>(<span class="string">"070"</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">//指定按什么格式转化数据</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="built_in">parseInt</span>(<span class="string">"0xAF"</span>, <span class="number">16</span>);    <span class="comment">//175 </span></span><br><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(<span class="string">"AF"</span>, <span class="number">16</span>);     <span class="comment">//175 </span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(<span class="string">"AF"</span>);         <span class="comment">//NaN </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(<span class="string">"10"</span>, <span class="number">2</span>);      <span class="comment">//2  （按二进制解析） </span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(<span class="string">"10"</span>, <span class="number">8</span>);      <span class="comment">//8  （按八进制解析） </span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">parseInt</span>(<span class="string">"10"</span>, <span class="number">10</span>);     <span class="comment">//10 （按十进制解析） </span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">parseInt</span>(<span class="string">"10"</span>, <span class="number">16</span>);     <span class="comment">//16 （按十六进制解析）</span></span><br></pre></td></tr></table></figure>
+<p>与 parseInt()函数类似，parseFloat()也是从第一个字符（位置 0）开始解析每个字符。而且<br>也是一直解析到字符串末尾，或者解析到遇见一个无效的浮点数字字符为止.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 = <span class="built_in">parseFloat</span>(<span class="string">"1234blue"</span>);          <span class="comment">//1234 （整数） </span></span><br><span class="line"><span class="keyword">var</span> num2 = <span class="built_in">parseFloat</span>(<span class="string">"0xA"</span>);               <span class="comment">//0 </span></span><br><span class="line"><span class="keyword">var</span> num3 = <span class="built_in">parseFloat</span>(<span class="string">"22.5"</span>);              <span class="comment">//22.5 </span></span><br><span class="line"><span class="keyword">var</span> num4 = <span class="built_in">parseFloat</span>(<span class="string">"22.34.5"</span>);           <span class="comment">//22.34 </span></span><br><span class="line"><span class="keyword">var</span> num5 = <span class="built_in">parseFloat</span>(<span class="string">"0908.5"</span>);            <span class="comment">//908.5 </span></span><br><span class="line"><span class="keyword">var</span> num6 = <span class="built_in">parseFloat</span>(<span class="string">"3.125e7"</span>);           <span class="comment">//31250000</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="String类型">String类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//null 和 undefined没有toString方法</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">11</span>; </span><br><span class="line"><span class="keyword">var</span> ageAsString = age.toString();         <span class="comment">// 字符串"11" </span></span><br><span class="line"><span class="keyword">var</span> found = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">var</span> foundAsString = found.toString();     <span class="comment">// 字符串"true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回转化为进制之后的字符串</span></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>; </span><br><span class="line">alert(num.toString());         <span class="comment">// "10" </span></span><br><span class="line">alert(num.toString(<span class="number">2</span>));        <span class="comment">// "1010" </span></span><br><span class="line">alert(num.toString(<span class="number">8</span>));        <span class="comment">// "12" </span></span><br><span class="line">alert(num.toString(<span class="number">10</span>));       <span class="comment">// "10" </span></span><br><span class="line">alert(num.toString(<span class="number">16</span>));       <span class="comment">// "a" </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用转型函数 String()</span></span><br><span class="line"><span class="comment">//  1. 如果值有 toString()方法，则调用该方法（没有参数）并返回相应的结果</span></span><br><span class="line"><span class="comment">//  2. 如果值是 null，则返回"null"；</span></span><br><span class="line"><span class="comment">//  3. 如果值是 undefined，则返回"undefined"  </span></span><br><span class="line"><span class="keyword">var</span> value1 = <span class="number">10</span>; </span><br><span class="line"><span class="keyword">var</span> value2 = <span class="literal">true</span>; </span><br><span class="line"><span class="keyword">var</span> value3 = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">var</span> value4; </span><br><span class="line">alert(<span class="built_in">String</span>(value1));     <span class="comment">// "10" </span></span><br><span class="line">alert(<span class="built_in">String</span>(value2));     <span class="comment">// "true" </span></span><br><span class="line">alert(<span class="built_in">String</span>(value3));     <span class="comment">// "null" </span></span><br><span class="line">alert(<span class="built_in">String</span>(value4));     <span class="comment">// "undefined"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Object类型">Object类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>(); </span><br><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>; <span class="comment">// 有效，但不推荐省略圆括号</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//constructor:保存着用于创建当前对象的函数</span></span><br><span class="line"><span class="comment">//hasOwnProperty(propertyName)：用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在</span></span><br><span class="line"><span class="comment">//isPrototypeOf(object)：用于检查传入的对象是否是传入对象的原型</span></span><br><span class="line"><span class="comment">//propertyIsEnumerable(propertyName)：用于检查给定的属性是否能够使用 for-in 语句来枚举</span></span><br><span class="line"><span class="comment">//toLocaleString()：返回对象的字符串表示，该字符串与执行环境的地区对应</span></span><br><span class="line"><span class="comment">//toString()：返回对象的字符串表示</span></span><br><span class="line"><span class="comment">//valueOf()：返回对象的字符串、数值或布尔值表示。通常与  toString()方法的返回值相同</span></span><br></pre></td></tr></table></figure>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/26/javascript-datatype/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/26/javascript-datatype/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/10/linux-char/" title="Shell特殊字符小结" itemprop="url">Shell特殊字符小结</a>
   </h1>
   <p class="article-author">By
@@ -728,79 +843,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/19/linux-nginx-2/" title="Nginx系列——主要模块" itemprop="url">Nginx系列——主要模块</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-19T09:54:48.000Z" itemprop="datePublished"> 发表于 2015-04-19</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="主要模块">主要模块</h1><h2 id="location模块">location模块</h2><p>location是Nginx的重要模块，基本语法：location [=|~|~*|^~] /uri/ { … }</p>
-<ol>
-<li>“=” 严格匹配。如果这个查询匹配，那么将停止搜索并立即处理此请求</li>
-<li>“^~” 表示URI定位必须以指定模式开始，如果匹配，停止搜索其他模式</li>
-<li>“~” 和 “~*” 为区分大小写匹配和不区分大小写匹配</li>
-<li>“!~”和“!~*” 为区分大小写不匹配和不区分大小不匹配</li>
-<li>“@xxx” 表示定义location区段名，客户端不能访问，内部产生的请求可以,例如try_files或error_page</li>
-<li>“/” 表示通用匹配，任何请求都会匹配到<br>如果多个location匹配按什么顺序呢？Nginx首先会按“=”去匹配，匹配不了然后按照“^~”匹配，如果还是匹配不了，就会按location的顺序匹配其他的规则，最后还是没匹配就使用“/”通用匹配。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#精确匹配，不能用正则</span></span><br><span class="line">location = /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#URI定位匹配，可用正则</span></span><br><span class="line">location ^~ /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#正则匹配 区分大小写</span></span><br><span class="line">location ~ /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#正则匹配 不区分大小写</span></span><br><span class="line">location ~* /abc &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#匹配所有</span></span><br><span class="line">location  / &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/04/19/linux-nginx-2/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Nginx/">Nginx</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/19/linux-nginx-2/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/19/linux-nginx-2/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -823,7 +865,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 		  
 		
 		  
@@ -864,6 +906,10 @@
 			
 		
 			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>2</sup></a></li>
 			
 		
@@ -873,10 +919,6 @@
 		
 			
 				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>1</sup></a></li>
 			
 		
 			
