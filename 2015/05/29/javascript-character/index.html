@@ -1,0 +1,539 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript系列——操作符 | Roy.Yin&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Roy.Yin">
+    
+
+    
+    <meta name="description" content="JavaScript系列——操作符操作符一元操作符12345678910111213141516171819202122232425262728293031323334353637383940var s1 = &quot;2&quot;; var s2 = &quot;z&quot;; var b = false; var f = 1.1; var o = &amp;#123;      valueOf: function() &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript系列——操作符">
+<meta property="og:url" content="http://yinrongping.github.io/2015/05/29/javascript-character/index.html">
+<meta property="og:site_name" content="Roy.Yin's Blog">
+<meta property="og:description" content="JavaScript系列——操作符操作符一元操作符12345678910111213141516171819202122232425262728293031323334353637383940var s1 = &quot;2&quot;; var s2 = &quot;z&quot;; var b = false; var f = 1.1; var o = &amp;#123;      valueOf: function() &amp;#123;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript系列——操作符">
+<meta name="twitter:description" content="JavaScript系列——操作符操作符一元操作符12345678910111213141516171819202122232425262728293031323334353637383940var s1 = &quot;2&quot;; var s2 = &quot;z&quot;; var b = false; var f = 1.1; var o = &amp;#123;      valueOf: function() &amp;#123;">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Roy.Yin&#39;s Blog" title="Roy.Yin&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Roy.Yin&#39;s Blog">Roy.Yin&#39;s Blog</a></h1>
+				<h2 class="blog-motto">不要见怪，不要见外</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yinrongping.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/29/javascript-character/" title="JavaScript系列——操作符" itemprop="url">JavaScript系列——操作符</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-29T14:20:52.000Z" itemprop="datePublished"> 发表于 2015-05-29</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——操作符"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符"><span class="toc-number">1.1.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一元操作符"><span class="toc-number">1.1.1.</span> <span class="toc-text">一元操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#位操作符"><span class="toc-number">1.1.2.</span> <span class="toc-text">位操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布尔操作符"><span class="toc-number">1.1.3.</span> <span class="toc-text">布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑非"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">逻辑非</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑与"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">逻辑与</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑或"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">逻辑或</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加和减操作符"><span class="toc-number">1.1.4.</span> <span class="toc-text">加和减操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加法"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">加法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#减法"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">减法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相等操作符"><span class="toc-number">1.1.5.</span> <span class="toc-text">相等操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逗号操作符"><span class="toc-number">1.1.6.</span> <span class="toc-text">逗号操作符</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="JavaScript系列——操作符">JavaScript系列——操作符</h1><h2 id="操作符">操作符</h2><h3 id="一元操作符">一元操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">"2"</span>; </span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">"z"</span>; </span><br><span class="line"><span class="keyword">var</span> b = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">var</span> f = <span class="number">1.1</span>; </span><br><span class="line"><span class="keyword">var</span> o = &#123;  </span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">s1++;     <span class="comment">// 值变成数值 3   --先转为数值类型</span></span><br><span class="line">s2++;     <span class="comment">// 值变成 NaN   </span></span><br><span class="line">b++;      <span class="comment">// 值变成数值 1   --false先转为0，true先转为1</span></span><br><span class="line">f--;      <span class="comment">// 值变成 0.10000000000000009（由于浮点舍入错误所致）  --执行-1</span></span><br><span class="line">o--;      <span class="comment">// 值变成数值-2  --调用valueOf方法 返回为数值就-1，其他按上面的规则</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="string">"01"</span>; </span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">"1.1"</span>; </span><br><span class="line"><span class="keyword">var</span> s3 = <span class="string">"z"</span>; </span><br><span class="line"><span class="keyword">var</span> b = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">var</span> f = <span class="number">1.1</span>; </span><br><span class="line"><span class="keyword">var</span> o = &#123; </span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line">s1 = +s1;      <span class="comment">// 值变成数值 1 </span></span><br><span class="line">s2 = +s2;      <span class="comment">// 值变成数值 1.1 </span></span><br><span class="line">s3 = +s3;      <span class="comment">// 值变成 NaN </span></span><br><span class="line">b = +b;        <span class="comment">// 值变成数值 0 </span></span><br><span class="line">f = +f;        <span class="comment">// 值未变，仍然是 1.1 </span></span><br><span class="line">o = +o;        <span class="comment">// 值变成数值-1 </span></span><br><span class="line"></span><br><span class="line">s1 = -s1;         <span class="comment">// 值变成了数值-1 </span></span><br><span class="line">s2 = -s2;         <span class="comment">// 值变成了数值-1.1 </span></span><br><span class="line">s3 = -s3;         <span class="comment">// 值变成了 NaN </span></span><br><span class="line">b = -b;           <span class="comment">// 值变成了数值 0 </span></span><br><span class="line">f = -f;           <span class="comment">// 变成了-1.1 </span></span><br><span class="line">o = -o;           <span class="comment">// 值变成了数值 1</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="位操作符">位操作符</h3><pre><code>ECMAScript 中的所有数值都以 IEEE<span class="number">-754</span> <span class="number">64</span> 位格式存储，但位操作符并不直接操作 <span class="number">64</span> 位的值。而是先将 <span class="number">64</span> 位的值转换成 <span class="number">32</span> 位的整数，然后执行操作，最后再将结果转换回 <span class="number">64</span> 位。对于有符号的整数，<span class="number">32</span> 位中的前 <span class="number">31</span> 位用于表示整数的值。第 <span class="number">32</span> 位用于表示数值的符号：<span class="number">0</span> 表示正数，<span class="number">1</span> 表示负数。
+
+负数同样以二进制码存储，但使用的格式是二进制补码。计算一个数值的二进制补码，需要经过下列 <span class="number">3</span> 个步骤： 
+<span class="comment">(1)</span> 求这个数值绝对值的二进制码（例如，要求<span class="number">18</span> 的二进制补码，先求 <span class="number">18</span> 的二进制码）； 
+<span class="comment">(2)</span> 求二进制反码，即将 <span class="number">0</span> 替换为 <span class="number">1</span>，将 <span class="number">1</span> 替换为 <span class="number">0</span>； 
+<span class="comment">(3)</span> 得到的二进制反码加 <span class="number">1</span>。 
+要根据这 <span class="number">3</span> 个步骤求得<span class="number">18</span> 的二进制码，首先就要求得 <span class="number">18</span> 的二进制码，即： 
+<span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">0010</span> 
+然后，求其二进制反码，即 <span class="number">0</span> 和 <span class="number">1</span> 互换： 
+<span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1110</span> <span class="number">1101</span> 
+最后，二进制反码加 <span class="number">1</span>： 
+<span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1110</span> <span class="number">1101</span>  + <span class="number">1</span>=<span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1110</span> <span class="number">1110</span>
+这样，就求得了<span class="number">18</span> 的二进制表示，即 <span class="number">11111111111111111111111111101110</span>
+</code></pre><h3 id="布尔操作符">布尔操作符</h3><h4 id="逻辑非">逻辑非</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">alert(!<span class="literal">false</span>);         <span class="comment">// true </span></span><br><span class="line">alert(!<span class="string">"blue"</span>);        <span class="comment">// false </span></span><br><span class="line">alert(!<span class="number">0</span>);             <span class="comment">// true </span></span><br><span class="line">alert(!<span class="literal">NaN</span>);           <span class="comment">// true </span></span><br><span class="line">alert(!<span class="literal">null</span>);          <span class="comment">// true </span></span><br><span class="line">alert(!<span class="literal">undefined</span>);     <span class="comment">// true </span></span><br><span class="line">alert(!<span class="string">""</span>);            <span class="comment">// true </span></span><br><span class="line">alert(!<span class="number">12345</span>);         <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">alert(!!<span class="string">"blue"</span>);      <span class="comment">//true </span></span><br><span class="line">alert(!!<span class="number">0</span>);           <span class="comment">//false </span></span><br><span class="line">alert(!!<span class="literal">NaN</span>);         <span class="comment">//false </span></span><br><span class="line">alert(!!<span class="string">""</span>);          <span class="comment">//false </span></span><br><span class="line">alert(!!<span class="number">12345</span>);       <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h4 id="逻辑与">逻辑与</h4><pre><code>如果<span class="number">2</span>个操作数都是布尔类型，就按照惯例得到返回值，如果<span class="number">2</span>个操作数不是布尔类型，则遵循以下规则：
+<span class="number">1.</span>如果第一个操作数是对象，则返回第二个操作数； 
+<span class="number">2.</span>如果第二个操作数是对象，则只有在第一个操作数的求值结果为  <span class="literal">true</span> 的情况下才会返回该 
+对象； 
+<span class="number">3.</span>如果两个操作数都是对象，则返回第二个操作数； 
+<span class="number">4.</span>如果有一个操作数是 <span class="literal">null</span>，则返回 <span class="literal">null</span>； 
+<span class="number">5.</span>如果有一个操作数是 <span class="literal">NaN</span>，则返回 <span class="literal">NaN</span>； 
+<span class="number">6.</span>如果有一个操作数是 <span class="literal">undefined</span>，则返回 <span class="literal">undefined</span>。
+逻辑与操作属于短路操作，即如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。
+</code></pre><h4 id="逻辑或">逻辑或</h4><pre><code>与逻辑与操作相似，如果有一个操作数不是布尔值，逻辑或也不一定返回布尔值；此时，它遵循下
+列规则： 
+<span class="number">1.</span>如果第一个操作数是对象，则返回第一个操作数； 
+<span class="number">2.</span>如果第一个操作数的求值结果为 <span class="literal">false</span>，则返回第二个操作数； 
+<span class="number">3.</span>如果两个操作数都是对象，则返回第一个操作数； 
+<span class="number">4.</span>如果两个操作数都是 <span class="literal">null</span>，则返回 <span class="literal">null</span>； 
+<span class="number">5.</span>如果两个操作数都是 <span class="literal">NaN</span>，则返回 <span class="literal">NaN</span>； 
+<span class="number">6.</span>如果两个操作数都是 <span class="literal">undefined</span>，则返回 <span class="literal">undefined</span>。 
+与逻辑与操作符相似，逻辑或操作符也是短路操作符。
+</code></pre><h3 id="加和减操作符">加和减操作符</h3><h4 id="加法">加法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="number">5</span> + <span class="number">5</span>;       <span class="comment">// 两个数值相加 </span></span><br><span class="line">alert(result1);            <span class="comment">// 10 </span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="number">5</span> + <span class="string">"5"</span>;     <span class="comment">// 一个数值和一个字符串相加 </span></span><br><span class="line">alert(result2);            <span class="comment">// "55"</span></span><br></pre></td></tr></table></figure>
+<p>如果有一个操作数是对象、数值或布尔值，则调用它们的 toString()方法取得相应的字符串值，<br>然后再应用前面关于字符串的规则。对于 undefined 和 null，则分别调用 String()函数并取得字符<br>串”undefined”和”null”</p>
+<h4 id="减法">减法</h4><pre><code>如果有一个操作数是字符串、布尔值、null 或 undefined，则先在后台调用 <span class="function"><span class="title">Number</span><span class="params">()</span></span>函数将
+其转换为数值，然后再根据前面的规则执行减法计算。如果转换的结果是  NaN，则减法的结果
+就是 NaN；
+如果有一个操作数是对象，则调用对象的 <span class="function"><span class="title">valueOf</span><span class="params">()</span></span>方法以取得表示该对象的数值。如果得到
+的值是 NaN，则减法的结果就是 NaN。如果对象没有 <span class="function"><span class="title">valueOf</span><span class="params">()</span></span>方法，则调用其 <span class="function"><span class="title">toString</span><span class="params">()</span></span>
+方法并将得到的字符串转换为数值。
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = <span class="number">5</span> - <span class="literal">true</span>;    <span class="comment">// 4，因为 true 被转换成了 1 </span></span><br><span class="line"><span class="keyword">var</span> result2 = <span class="literal">NaN</span> - <span class="number">1</span>;     <span class="comment">// NaN </span></span><br><span class="line"><span class="keyword">var</span> result3 = <span class="number">5</span> - <span class="number">3</span>;       <span class="comment">// 2 </span></span><br><span class="line"><span class="keyword">var</span> result4 = <span class="number">5</span> - <span class="string">""</span>;      <span class="comment">// 5，因为"" 被转换成了 0 </span></span><br><span class="line"><span class="keyword">var</span> result5 = <span class="number">5</span> - <span class="string">"2"</span>;     <span class="comment">// 3，因为"2"被转换成了 2 </span></span><br><span class="line"><span class="keyword">var</span> result6 = <span class="number">5</span> - <span class="literal">null</span>;    <span class="comment">// 5，因为 null 被转换成了 0 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="string">"23"</span> &lt; <span class="string">"3"</span>;    <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="相等操作符">相等操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>   <span class="comment">//true  </span></span><br><span class="line"><span class="literal">true</span> == <span class="number">1</span>           <span class="comment">//true </span></span><br><span class="line"><span class="string">"NaN"</span> == <span class="literal">NaN</span>        <span class="comment">//false  </span></span><br><span class="line"><span class="literal">true</span> == <span class="number">2</span>           <span class="comment">//false </span></span><br><span class="line"><span class="number">5</span> == <span class="literal">NaN</span>            <span class="comment">//false  </span></span><br><span class="line"><span class="literal">undefined</span> == <span class="number">0</span>      <span class="comment">//false </span></span><br><span class="line"><span class="literal">NaN</span> == <span class="literal">NaN</span>          <span class="comment">//false  </span></span><br><span class="line"><span class="literal">null</span> == <span class="number">0</span>           <span class="comment">//false </span></span><br><span class="line"><span class="literal">NaN</span> != <span class="literal">NaN</span>          <span class="comment">//true  </span></span><br><span class="line"><span class="string">"5"</span>==<span class="number">5</span>              <span class="comment">//true </span></span><br><span class="line"><span class="literal">false</span> == <span class="number">0</span>          <span class="comment">//true </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = (<span class="string">"55"</span> == <span class="number">55</span>);    <span class="comment">//true，因为转换后相等 </span></span><br><span class="line"><span class="keyword">var</span> result2 = (<span class="string">"55"</span> === <span class="number">55</span>);   <span class="comment">//false，因为不同的数据类型不相等</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result1 = (<span class="string">"55"</span> != <span class="number">55</span>);     <span class="comment">//false，因为转换后相等 </span></span><br><span class="line"><span class="keyword">var</span> result2 = (<span class="string">"55"</span> !== <span class="number">55</span>);    <span class="comment">//true，因为不同的数据类型不相等</span></span><br></pre></td></tr></table></figure>
+<h3 id="逗号操作符">逗号操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1=<span class="number">1</span>, num2=<span class="number">2</span>, num3=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> num = (<span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">0</span>); <span class="comment">// num 的值为 0</span></span><br></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yinrongping.github.io/2015/05/29/javascript-character/" data-title="JavaScript系列——操作符 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/26/javascript-datatype/"  title="JavaScript系列——数据类型">
+ <strong>下一篇：</strong><br/> 
+ <span>JavaScript系列——数据类型
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/29/javascript-character/" data-title="JavaScript系列——操作符" data-url="http://yinrongping.github.io/2015/05/29/javascript-character/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——操作符"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符"><span class="toc-number">1.1.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一元操作符"><span class="toc-number">1.1.1.</span> <span class="toc-text">一元操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#位操作符"><span class="toc-number">1.1.2.</span> <span class="toc-text">位操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布尔操作符"><span class="toc-number">1.1.3.</span> <span class="toc-text">布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑非"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">逻辑非</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑与"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">逻辑与</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑或"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">逻辑或</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加和减操作符"><span class="toc-number">1.1.4.</span> <span class="toc-text">加和减操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加法"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">加法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#减法"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">减法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相等操作符"><span class="toc-number">1.1.5.</span> <span class="toc-text">相等操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逗号操作符"><span class="toc-number">1.1.6.</span> <span class="toc-text">逗号操作符</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python/" title="Python">Python<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashSet/" title="HashSet">HashSet<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HashMap/" title="HashMap">HashMap<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/CopyOnWriteArraySet/" title="CopyOnWriteArraySet">CopyOnWriteArraySet<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.jianshu.com/" target="_blank" title="一个基于内容分享的社区">简书</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me/" target="_blank" title="本博客使用的hexo主题的作者">Jacman</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Roy.Yin. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://yinrongping.github.io/about" target="_blank" title="Roy.Yin">Roy.Yin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"royin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

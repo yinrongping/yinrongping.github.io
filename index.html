@@ -80,6 +80,70 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/29/javascript-character/" title="JavaScript系列——操作符" itemprop="url">JavaScript系列——操作符</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-29T14:20:52.000Z" itemprop="datePublished"> 发表于 2015-05-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="JavaScript系列——操作符">JavaScript系列——操作符</h1><h2 id="操作符">操作符</h2><h3 id="一元操作符">一元操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="string">"2"</span>; </span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">"z"</span>; </span><br><span class="line"><span class="keyword">var</span> b = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">var</span> f = <span class="number">1.1</span>; </span><br><span class="line"><span class="keyword">var</span> o = &#123;  </span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line">s1++;     <span class="comment">// 值变成数值 3   --先转为数值类型</span></span><br><span class="line">s2++;     <span class="comment">// 值变成 NaN   </span></span><br><span class="line">b++;      <span class="comment">// 值变成数值 1   --false先转为0，true先转为1</span></span><br><span class="line">f--;      <span class="comment">// 值变成 0.10000000000000009（由于浮点舍入错误所致）  --执行-1</span></span><br><span class="line">o--;      <span class="comment">// 值变成数值-2  --调用valueOf方法 返回为数值就-1，其他按上面的规则</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="string">"01"</span>; </span><br><span class="line"><span class="keyword">var</span> s2 = <span class="string">"1.1"</span>; </span><br><span class="line"><span class="keyword">var</span> s3 = <span class="string">"z"</span>; </span><br><span class="line"><span class="keyword">var</span> b = <span class="literal">false</span>; </span><br><span class="line"><span class="keyword">var</span> f = <span class="number">1.1</span>; </span><br><span class="line"><span class="keyword">var</span> o = &#123; </span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line">s1 = +s1;      <span class="comment">// 值变成数值 1 </span></span><br><span class="line">s2 = +s2;      <span class="comment">// 值变成数值 1.1 </span></span><br><span class="line">s3 = +s3;      <span class="comment">// 值变成 NaN </span></span><br><span class="line">b = +b;        <span class="comment">// 值变成数值 0 </span></span><br><span class="line">f = +f;        <span class="comment">// 值未变，仍然是 1.1 </span></span><br><span class="line">o = +o;        <span class="comment">// 值变成数值-1 </span></span><br><span class="line"></span><br><span class="line">s1 = -s1;         <span class="comment">// 值变成了数值-1 </span></span><br><span class="line">s2 = -s2;         <span class="comment">// 值变成了数值-1.1 </span></span><br><span class="line">s3 = -s3;         <span class="comment">// 值变成了 NaN </span></span><br><span class="line">b = -b;           <span class="comment">// 值变成了数值 0 </span></span><br><span class="line">f = -f;           <span class="comment">// 变成了-1.1 </span></span><br><span class="line">o = -o;           <span class="comment">// 值变成了数值 1</span></span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/29/javascript-character/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/29/javascript-character/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/29/javascript-character/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/26/javascript-datatype/" title="JavaScript系列——数据类型" itemprop="url">JavaScript系列——数据类型</a>
   </h1>
   <p class="article-author">By
@@ -732,72 +796,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/22/linux-nginx-3/" title="Nginx系列——Nginx配置与优化" itemprop="url">Nginx系列——Nginx配置与优化</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-21T16:54:48.000Z" itemprop="datePublished"> 发表于 2015-04-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="Nginx配置与优化">Nginx配置与优化</h1><h2 id="include使用">include使用</h2><p>当我们配置多个虚拟主机在nginx配置文件中的时候，我们会越来越发现，nginx.conf文件越来越大，维护起来也越来越麻烦，这个时候我们就需要使用include,把每个虚拟主机配置到自己的conf中，然后在nginx.conf中include就可以了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#目录</span></span><br><span class="line">nginx.conf</span><br><span class="line">site/</span><br><span class="line">    www_abc_com.conf</span><br><span class="line">    www_edf_com.conf</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#nginx.conf配置</span></span><br><span class="line">http&#123;</span><br><span class="line">    ...</span><br><span class="line">    include site/www_abc_com.conf;</span><br><span class="line">    include site/www_edf_com.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然一些特殊功能模块的配置也可以独立出一个单一的配置文件，这样nginx.conf的结构会很清晰。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/04/22/linux-nginx-3/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Nginx/">Nginx</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/22/linux-nginx-3/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/22/linux-nginx-3/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -820,7 +818,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
 		  
 		
 		  
@@ -853,15 +851,15 @@
 			
 		
 			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/Linux/" title="Linux">Linux<sup>2</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/Python/" title="Python">Python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 			
 		
 			
