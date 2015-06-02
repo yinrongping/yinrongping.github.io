@@ -4,25 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>jJavaScript入门系列——语句和函数 | Roy.Yin&#39;s Blog</title>
+    <title>JavaScript入门系列——语句和函数 | Roy.Yin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Roy.Yin">
     
 
     
-    <meta name="description" content="JavaScript系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;
-do">
+    <meta name="description" content="JavaScript入门系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jJavaScript入门系列——语句和函数">
+<meta property="og:title" content="JavaScript入门系列——语句和函数">
 <meta property="og:url" content="http://yinrongping.github.io/2015/06/02/javascript-sentence/index.html">
 <meta property="og:site_name" content="Roy.Yin's Blog">
-<meta property="og:description" content="JavaScript系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;
-do">
+<meta property="og:description" content="JavaScript入门系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jJavaScript入门系列——语句和函数">
-<meta name="twitter:description" content="JavaScript系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;
-do">
+<meta name="twitter:title" content="JavaScript入门系列——语句和函数">
+<meta name="twitter:description" content="JavaScript入门系列——语句和函数语句if语句12345678var i = 30;if (i &amp;gt; 10) &amp;#123;     alert(&quot;i 大于 25.&quot;); &amp;#125; else if (i &amp;lt; 0) &amp;#123;     alert(&quot;i 小于 0.&quot;); &amp;#125; else &amp;#123;     alert(&quot;i 在0 和 10 之间.&quot;); &amp;#125;">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -81,7 +78,7 @@ do">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/02/javascript-sentence/" title="jJavaScript入门系列——语句和函数" itemprop="url">jJavaScript入门系列——语句和函数</a>
+      <a href="/2015/06/02/javascript-sentence/" title="JavaScript入门系列——语句和函数" itemprop="url">JavaScript入门系列——语句和函数</a>
   </h1>
   <p class="article-author">By
        
@@ -97,11 +94,11 @@ do">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——语句和函数"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——语句和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">1.1.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">do-while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">1.1.3.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">1.1.4.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in语句"><span class="toc-number">1.1.5.</span> <span class="toc-text">for-in语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label语句"><span class="toc-number">1.1.6.</span> <span class="toc-text">label语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with语句"><span class="toc-number">1.1.7.</span> <span class="toc-text">with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">1.1.8.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.2.</span> <span class="toc-text">函数</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript入门系列——语句和函数"><span class="toc-number">1.</span> <span class="toc-text">JavaScript入门系列——语句和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">1.1.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">do-while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">1.1.3.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">1.1.4.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in语句"><span class="toc-number">1.1.5.</span> <span class="toc-text">for-in语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label语句"><span class="toc-number">1.1.6.</span> <span class="toc-text">label语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with语句"><span class="toc-number">1.1.7.</span> <span class="toc-text">with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">1.1.8.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.2.</span> <span class="toc-text">函数</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="JavaScript系列——语句和函数">JavaScript系列——语句和函数</h1><h2 id="语句">语句</h2><h3 id="if语句">if语句</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">10</span>) &#123; </span><br><span class="line">    alert(<span class="string">"i 大于 25."</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123; </span><br><span class="line">    alert(<span class="string">"i 小于 0."</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    alert(<span class="string">"i 在0 和 10 之间."</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+		<h1 id="JavaScript入门系列——语句和函数">JavaScript入门系列——语句和函数</h1><h2 id="语句">语句</h2><h3 id="if语句">if语句</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">if</span> (i &gt; <span class="number">10</span>) &#123; </span><br><span class="line">    alert(<span class="string">"i 大于 25."</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">0</span>) &#123; </span><br><span class="line">    alert(<span class="string">"i 小于 0."</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    alert(<span class="string">"i 在0 和 10 之间."</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="do-while语句">do-while语句</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">do</span> &#123; </span><br><span class="line">   i += <span class="number">3</span>; </span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">10</span>); </span><br><span class="line"> </span><br><span class="line">alert(i) <span class="comment">//i=12</span></span><br></pre></td></tr></table></figure>
 <pre><code>像 <span class="keyword">do</span>-<span class="keyword">while</span> 这种后测试循环语句最常用于循环体中的代码至少要被执行一次的情形。
 </code></pre><a id="more"></a>
@@ -138,7 +135,7 @@ do">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yinrongping.github.io/2015/06/02/javascript-sentence/" data-title="jJavaScript入门系列——语句和函数 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yinrongping.github.io/2015/06/02/javascript-sentence/" data-title="JavaScript入门系列——语句和函数 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -164,7 +161,7 @@ do">
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/06/02/javascript-sentence/" data-title="jJavaScript入门系列——语句和函数" data-url="http://yinrongping.github.io/2015/06/02/javascript-sentence/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/02/javascript-sentence/" data-title="JavaScript入门系列——语句和函数" data-url="http://yinrongping.github.io/2015/06/02/javascript-sentence/"></div>
 </section>
 
 
@@ -174,7 +171,7 @@ do">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——语句和函数"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——语句和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">1.1.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">do-while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">1.1.3.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">1.1.4.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in语句"><span class="toc-number">1.1.5.</span> <span class="toc-text">for-in语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label语句"><span class="toc-number">1.1.6.</span> <span class="toc-text">label语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with语句"><span class="toc-number">1.1.7.</span> <span class="toc-text">with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">1.1.8.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.2.</span> <span class="toc-text">函数</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript入门系列——语句和函数"><span class="toc-number">1.</span> <span class="toc-text">JavaScript入门系列——语句和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">1.1.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">1.1.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while语句"><span class="toc-number">1.1.2.</span> <span class="toc-text">do-while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">1.1.3.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">1.1.4.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in语句"><span class="toc-number">1.1.5.</span> <span class="toc-text">for-in语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label语句"><span class="toc-number">1.1.6.</span> <span class="toc-text">label语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with语句"><span class="toc-number">1.1.7.</span> <span class="toc-text">with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#swith语句"><span class="toc-number">1.1.8.</span> <span class="toc-text">swith语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.2.</span> <span class="toc-text">函数</span></a></li></ol></li></ol>
  
   </div>
 

@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>JavaScript系列——作用域和作用域链 | Roy.Yin&#39;s Blog</title>
+    <title>JavaScript入门系列——作用域和作用域链 | Roy.Yin&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Roy.Yin">
     
 
     
-    <meta name="description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
+    <meta name="description" content="JavaScript入门系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript系列——作用域和作用域链">
+<meta property="og:title" content="JavaScript入门系列——作用域和作用域链">
 <meta property="og:url" content="http://yinrongping.github.io/2015/05/09/javascript-scope/index.html">
 <meta property="og:site_name" content="Roy.Yin's Blog">
-<meta property="og:description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
+<meta property="og:description" content="JavaScript入门系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript系列——作用域和作用域链">
-<meta name="twitter:description" content="JavaScript系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法:">
+<meta name="twitter:title" content="JavaScript入门系列——作用域和作用域链">
+<meta name="twitter:description" content="JavaScript入门系列——作用域和作用域链作用域JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。1234567891011121314function sum(x, y) &amp;#123;   // 不推荐写法">
 
     
     <link rel="alternative" href="/atom.xml" title="Roy.Yin&#39;s Blog" type="application/atom+xml">
@@ -78,7 +78,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/09/javascript-scope/" title="JavaScript系列——作用域和作用域链" itemprop="url">JavaScript系列——作用域和作用域链</a>
+      <a href="/2015/05/09/javascript-scope/" title="JavaScript入门系列——作用域和作用域链" itemprop="url">JavaScript入门系列——作用域和作用域链</a>
   </h1>
   <p class="article-author">By
        
@@ -94,11 +94,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域链"><span class="toc-number">1.2.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.3.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript入门系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript入门系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域链"><span class="toc-number">1.2.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.3.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="JavaScript系列——作用域和作用域链">JavaScript系列——作用域和作用域链</h1><h2 id="作用域">作用域</h2><p>JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(x, y)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 不推荐写法: 隐式全局变量</span></span><br><span class="line">   result = x + y;  <span class="comment">//优化：var result = x + y; 使用var</span></span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反例，勿使用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//相当于：</span></span><br><span class="line">    <span class="comment">//var a = 0 ;</span></span><br><span class="line">    <span class="comment">//b = 0; 隐式全局变量</span></span><br><span class="line">    <span class="keyword">var</span> a = b = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+		<h1 id="JavaScript入门系列——作用域和作用域链">JavaScript入门系列——作用域和作用域链</h1><h2 id="作用域">作用域</h2><p>JavaScript通过函数管理作用域。在函数内部声明的变量只在这个函数内部，函数外面不可用。另一方面，全局变量就是在任何函数外面声明的或是未声明直接简单使用的。在实现项目中，为了避免全局变量冲突导致，我们应该尽量的减少全局变量的使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(x, y)</span> </span>&#123;</span><br><span class="line">   <span class="comment">// 不推荐写法: 隐式全局变量</span></span><br><span class="line">   result = x + y;  <span class="comment">//优化：var result = x + y; 使用var</span></span><br><span class="line">   <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反例，勿使用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//相当于：</span></span><br><span class="line">    <span class="comment">//var a = 0 ;</span></span><br><span class="line">    <span class="comment">//b = 0; 隐式全局变量</span></span><br><span class="line">    <span class="keyword">var</span> a = b = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>隐式全局变量和明确定义的全局变量间有些小的差异，就是通过delete操作符让变量未定义的能力。</p>
 <ul>
@@ -142,7 +142,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/" data-title="JavaScript系列——作用域和作用域链 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/" data-title="JavaScript入门系列——作用域和作用域链 | Roy.Yin&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -176,7 +176,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/09/javascript-scope/" data-title="JavaScript系列——作用域和作用域链" data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/09/javascript-scope/" data-title="JavaScript入门系列——作用域和作用域链" data-url="http://yinrongping.github.io/2015/05/09/javascript-scope/"></div>
 </section>
 
 
@@ -186,7 +186,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域链"><span class="toc-number">1.2.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.3.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript入门系列——作用域和作用域链"><span class="toc-number">1.</span> <span class="toc-text">JavaScript入门系列——作用域和作用域链</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">1.1.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域链"><span class="toc-number">1.2.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预编译"><span class="toc-number">1.3.</span> <span class="toc-text">预编译</span></a></li></ol></li></ol>
  
   </div>
 
