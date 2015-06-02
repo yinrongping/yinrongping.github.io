@@ -80,6 +80,77 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/23/java-LinkedHashMap/" title="JAVA集合系列——LinkedHashMap实现原理" itemprop="url">JAVA集合系列——LinkedHashMap实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-23T12:38:03.000Z" itemprop="datePublished"> 发表于 2015-04-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="LinkedHashMap实现原理">LinkedHashMap实现原理</h1><h2 id="特点">特点</h2><ol>
+<li>Map接口实现，继承于HashMap</li>
+<li>允许null键和null值</li>
+<li><strong>迭代有序（插入顺序或访问顺序）</strong></li>
+<li>非线程安全</li>
+<li>插入快，查询快，删除快</li>
+</ol>
+<h2 id="数据结构">数据结构</h2><p>LinkedHashMap继承HashMap，也是哈希表和链表的结合体，但是LinkedHashMap不只于此，LinkedHashMap还维护了所有元素的双重链表，有了这个双重链表，可以在一定程度上使得LinkedHashMap元素有序，具体是插入顺序，还是访问顺序，看具体的设置。LinkedHashMap的其他操作方式与HashMap基本一致。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//双向链表的表头元素</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">transient</span> Entry&lt;K,V&gt; header;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置迭代顺序，ture表示访问顺序，false表示插入顺序</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> accessOrder;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//内部Entry实现，继承HashMap的Entry</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">HashMap</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">       <span class="comment">//增加了before,after用来保存前一个元素和后一个元素的引用</span></span><br><span class="line">       Entry&lt;K,V&gt; before, after;</span><br><span class="line">       ...</span><br><span class="line">    &#125;    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/04/23/java-LinkedHashMap/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HashMap/">HashMap</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/23/java-LinkedHashMap/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/23/java-LinkedHashMap/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/22/linux-nginx-3/" title="Nginx系列——Nginx配置与优化" itemprop="url">Nginx系列——Nginx配置与优化</a>
   </h1>
   <p class="article-author">By
@@ -650,7 +721,7 @@
 		  
 		
 		  
-			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+			<li><a href="/categories/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
 		  
 		
 		  
@@ -679,11 +750,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>3</sup></a></li>
 			
 		
 			
