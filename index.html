@@ -80,6 +80,74 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/20/mongodb-start/" title="MongoDB系列——入门篇" itemprop="url">MongoDB系列——入门篇</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-20T14:47:07.000Z" itemprop="datePublished"> 发表于 2015-07-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="MongoDB系列——入门篇">MongoDB系列——入门篇</h1><h2 id="安装（windows）">安装（windows）</h2><pre><code><span class="number">1.</span>去MongoDB官网下载安装包，我们发现有<span class="number">32</span><span class="typename">bit</span>和<span class="number">64</span><span class="typename">bit</span>，<span class="number">32</span><span class="typename">bit</span>的mongodb最大只能存放<span class="number">2</span>G的数据，<span class="number">64</span><span class="typename">bit</span>就没有限制。
+<span class="number">2.</span>安装好后，将mongodb的bin路径配置到环境变量PATH中
+</code></pre><h2 id="启动与关闭">启动与关闭</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>mongod --dbpath=<span class="constant">D:</span>\mongodb\db  <span class="comment">#dbpath为数据库文件存放的目录，默认模式，可以不需要用户名和密码</span></span><br><span class="line"><span class="variable">$ </span>mongod --dbpath=<span class="constant">D:</span>\mongodb\db --auth <span class="comment"># auth表示开启安全认证模式</span></span><br><span class="line"><span class="variable">$ </span>db.shutdownServer() <span class="comment">#关闭数据库 也可以使用kill -2 pid,不要使用kill -9 pid</span></span><br></pre></td></tr></table></figure>
+<p>你也可以通过访问<a href="http://localhost:27017/来判断是否启动成功">http://localhost:27017/来判断是否启动成功</a></p>
+<h2 id="基本操作（mongoDB_3-0-4）">基本操作（mongoDB 3.0.4）</h2><h3 id="数据库">数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ use mydb <span class="comment">#创建数据库，并且使用它，如果存在，使用这个数据库</span></span><br><span class="line">$ show dbs <span class="comment">#查询已有的数据库列表</span></span><br><span class="line">$ show collections <span class="comment">#显示当前数据库中的所有的集合，相当于关系数据库的表</span></span><br><span class="line">$ db.dropDatabase() <span class="comment">#删除当前数据库</span></span><br><span class="line">$ db.cloneDatabase(“<span class="number">127.0</span>.<span class="number">0.1</span>”)  <span class="comment">#将指定机器上的数据库的数据克隆到当前数据库</span></span><br><span class="line">$ db.copyDatabase(<span class="string">"mydb"</span>, <span class="string">"temp"</span>, <span class="string">"127.0.0.1"</span>) <span class="comment">#将本机的mydb的数据复制到temp数据库中</span></span><br><span class="line">$ db.repairDatabase() <span class="comment">#修复当前数据库</span></span><br><span class="line">$ db.stats()  <span class="comment"># 获取数据库的状态</span></span><br><span class="line">$ db.getMongo()  <span class="comment"># 查看当前db的链接机器地址</span></span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/07/20/mongodb-start/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/MongoDB/">MongoDB</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/MongoDB/">MongoDB</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/20/mongodb-start/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/20/mongodb-start/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/06/02/javascript-sentence/" title="JavaScript系列——语句和函数" itemprop="url">JavaScript系列——语句和函数</a>
   </h1>
   <p class="article-author">By
@@ -722,76 +790,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/26/python-zen/" title="The Zen of Python——Python 之禅" itemprop="url">The Zen of Python——Python 之禅</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://yinrongping.github.io/about" title="Roy.Yin" target="_blank" itemprop="author">Roy.Yin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-26T12:55:52.000Z" itemprop="datePublished"> 发表于 2015-04-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="The_Zen_of_Python_——_Python_之禅">The Zen of Python —— Python 之禅</h1><p>Beautiful is better than ugly.<br>优美胜于丑陋（Python 以编写优美的代码为目标）.</p>
-<p>Explicit is better than implicit.<br>明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）.</p>
-<p>Simple is better than complex.<br>简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）.</p>
-<p>Complex is better than complicated.<br>复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）.</p>
-<p>Flat is better than nested.<br>扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套）.</p>
-<p>Sparse is better than dense.<br>间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）.</p>
-<p>Readability counts.<br>可读性很重要（优美的代码是可读的）.</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/04/26/python-zen/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Python/">Python</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Python/">Python</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/26/python-zen/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/26/python-zen/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -819,6 +817,10 @@
 		
 		  
 			<li><a href="/categories/Linux/" title="Linux">Linux<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/MongoDB/" title="MongoDB">MongoDB<sup>1</sup></a></li>
 		  
 		
 		  
@@ -868,6 +870,10 @@
 		
 			
 				<li><a href="/tags/ArrayList/" title="ArrayList">ArrayList<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/MongoDB/" title="MongoDB">MongoDB<sup>1</sup></a></li>
 			
 		
 			
